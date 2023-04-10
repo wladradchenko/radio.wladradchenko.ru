@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Нейронное Радио</title>
+	<link rel="manifest" type="text/json" href="/static/mainfest/manifest.webmanifest"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+	<meta property="og:image" content="/static/ico/icon.svg">
+	<link rel="apple-touch-icon" type="image/png" href="/static/ico/icon.svg">
+	<meta name="apple-mobile-web-app-title" content="Neural Radio">
+	<link rel="shortcut icon" type="image/x-icon" href="/static/ico/icon.svg">
+	<link rel="mask-icon" type="image/x-icon" href="/static/ico/icon.svg" color="#111">
+</head>
+<body style="max-height: 100vh;overflow-y: hidden;overflow-x: hidden;">
+	<div class="main">
+		<div id="notification-banner" style="display: none;">
+			<p>Слушать нейронное радио на <a href="https://radio.wladradchenko.ru">radio.wladradchenko.ru</a></button>
+			<button id="close-banner">&times;</button>
+		</div>		  
+		<img class="background-img" src="/static/assets/amp_prob.gif">
+	</div>
+	<div class="multi-select">
+		<select class="custom-select" id="name-filter" style="transform: scale(1.2);">
+			<option value="lofi">Lo-Fi</option>
+		</select>
+	</div>	
+	<div class="settings">
+		<button id="main-button" style="box-shadow: 2px 4px 0 #020406;background: transparent;display: block;">
+			<svg id="setting-open-button" style="display: block" width="35" height="35" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<g fill="#f5f5f5">
+					<path d="m462 324.8v22.398h22.398v44.801h-22.398v22.398h-44.801v-22.398h-22.398v44.801h-22.402v22.398h-44.797v-22.398h-22.402v-44.801h-22.398v22.398h-44.801v-22.398h-22.398v-44.801h22.398v-22.398h-44.801v-22.402h-22.398v-44.797h22.398v-22.402h44.801v-22.398h-22.398v-44.801h22.398v-22.398h44.801v22.398h22.398v-44.801h22.402v-22.398h44.797v22.398h22.402v44.801h22.398v-22.398h44.801v22.398h22.398v44.801h-22.398v22.398h44.801v22.402h22.398v44.797h-22.398v22.402zm-89.602-112h-44.797v22.398h-22.402v22.402h-22.398v44.797h22.398v22.402h22.402v22.398h44.797v-22.398h22.402v-22.402h22.398v-44.797h-22.398v-22.402h-22.402z" fill-rule="evenodd"></path>
+				</g>
+			</svg>
+			<svg id="setting-close-button" style="display: none" width="26pt" height="26pt" version="1.1" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<g fill="#f5f5f5">
+				<path d="m366.8 201.6h50.398v50.398h-50.398z"/>
+				<path d="m266 302.4h50.398v50.398h-50.398z"/>
+				<path d="m215.6 352.8h50.398v50.398h-50.398z"/>
+				<path d="m417.2 151.2h50.398v50.398h-50.398z"/>
+				<path d="m266 201.6h50.398v50.398h-50.398z"/>
+				<path d="m316.4 252h50.398v50.398h-50.398z"/>
+				<path d="m366.8 302.4h50.398v50.398h-50.398z"/>
+				<path d="m417.2 352.8h50.398v50.398h-50.398z"/>
+				<path d="m215.6 151.2h50.398v50.398h-50.398z"/>
+			</g>
+			</svg>
+		</button>
+		<div id="list-settings" class="closed">
+			<button style="background: transparent;display: block;" onclick="window.open('https://wladradchenko.ru/donat')">
+				<svg width="26pt" height="26pt" version="1.1" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+					<g fill="#f5f5f5">
+						<path d="m513.52 186.48v-45.809h-45.918v-46.367h-46.816v46.59h-46.594v46.145h-48.16v-46.145h-46.48v-46.59h-46.926v46.367h-46.031v45.809h-46.258v93.074h46.703v46.703h46.48v46.367h46.594v46.48h46.594v46.594l46.812-0.003907v-46.59h46.594v-46.48h46.258l-0.003906-46.367h46.93v-46.707h46.48v-93.074zm-93.969 185.14v0.22266m-139.21 0v-0.22266"/>
+					</g>
+				</svg>
+			</button>
+			<button id="voice" style="background: transparent;display: block;">
+				<svg id="voice-on-button" style="display: block;"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="-4 -4 50 50" width="26pt" height="26pt">
+				<g transform="scale(0.9)" fill="#f5f5f5">
+					<path d=" M 20.821 5.5 L 29.179 5.5 L 29.179 8.286 L 20.821 8.286 L 20.821 5.5 Z "/>
+					<path d=" M 12.465 27.786 L 15.25 27.786 L 15.25 30.572 L 12.465 30.572 L 12.465 27.786 Z "/>
+					<path d=" M 34.75 27.786 L 37.535 27.786 L 37.535 30.572 L 34.75 30.572 L 34.75 27.786 Z "/>
+					<path d=" M 31.965 30.572 L 34.751 30.572 L 34.751 33.358 L 31.965 33.358 L 31.965 30.572 Z "/>
+					<path d=" M 15.251 30.572 L 18.036 30.572 L 18.036 33.358 L 15.251 33.358 L 15.251 30.572 Z "/>
+					<path d=" M 18.035 25 L 20.821 25 L 20.821 27.786 L 18.035 27.786 L 18.035 25 Z "/>
+					<path d=" M 20.821 5.5 L 29.178 5.5 L 29.179 30.572 L 20.821 30.572 L 20.821 5.5 Z "/>
+					<path d=" M 29.179 25 L 31.965 25 L 31.965 27.786 L 29.179 27.786 L 29.179 25 Z "/>
+					<path d=" M 15.251 11.072 L 34.75 11.072 L 34.75 25 L 15.251 25 L 15.251 11.072 Z "/>
+					<path d=" M 31.965 11.072 L 34.751 11.072 L 34.751 25 L 31.965 25 L 31.965 11.072 Z "/>
+					<path d=" M 18.035 8.286 L 20.821 8.286 L 20.821 11.072 L 18.035 11.072 L 18.035 8.286 Z "/>
+					<path d=" M 29.179 8.286 L 31.965 8.286 L 31.965 11.072 L 29.179 11.072 L 29.179 8.286 Z "/>
+					<path d=" M 31.965 36.143 L 31.965 33.357 L 18.035 33.357 L 18.035 36.143 L 23.607 36.143 L 23.607 41.714 L 20.821 41.714 L 20.821 44.5 L 29.178 44.5 L 29.178 41.714 L 26.393 41.714 L 26.393 36.143 L 31.965 36.143 Z "/>
+				</g>
+				</svg>
+				<svg id="voice-off-button" style="display: none;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="-4 -4 50 50" width="26pt" height="26pt">
+					<g transform="scale(0.9)" fill="#f5f5f5">
+					  <path d=" M 20.821 5.5 L 29.179 5.5 L 29.179 8.286 L 20.821 8.286 L 20.821 5.5 Z "/>
+					  <path d=" M 12.465 27.786 L 15.25 27.786 L 15.25 30.572 L 12.465 30.572 L 12.465 27.786 Z "/>
+					  <path d=" M 6.607 38.929 L 9.393 38.929 L 9.393 41.714 L 6.607 41.714 L 6.607 38.929 Z "/>
+					  <path d=" M 18.035 27.786 L 20.821 27.786 L 20.821 30.572 L 18.035 30.572 L 18.035 27.786 Z "/>
+					  <path d=" M 34.751 13 L 37.536 13 L 37.536 15.786 L 34.751 15.786 L 34.751 13 Z "/>
+					  <path d=" M 37.535 10.214 L 40.321 10.214 L 40.321 13 L 37.535 13 L 37.535 10.214 Z "/>
+					  <path d=" M 40.321 7.428 L 43.107 7.428 L 43.107 10.214 L 40.321 10.214 L 40.321 7.428 Z "/>
+					  <path d=" M 9.679 36.143 L 12.465 36.143 L 12.465 38.929 L 9.679 38.929 L 9.679 36.143 Z "/>
+					  <path d=" M 12.465 33.357 L 15.25 33.357 L 15.25 36.143 L 12.465 36.143 L 12.465 33.357 Z "/>
+					  <path d=" M 34.75 27.786 L 37.535 27.786 L 37.535 30.572 L 34.75 30.572 L 34.75 27.786 Z "/>
+					  <path d=" M 31.965 30.572 L 34.751 30.572 L 34.751 33.358 L 31.965 33.358 L 31.965 30.572 Z "/>
+					  <path d=" M 15.251 30.572 L 18.036 30.572 L 18.036 33.358 L 15.251 33.358 L 15.251 30.572 Z "/>
+					  <path d=" M 18.035 25 L 20.821 25 L 20.821 27.786 L 18.035 27.786 L 18.035 25 Z " />
+					  <path d=" M 20.821 5.5 L 29.178 5.5 L 29.179 30.572 L 20.821 30.572 L 20.821 5.5 Z "/>
+					  <path d=" M 29.179 25 L 31.965 25 L 31.965 27.786 L 29.179 27.786 L 29.179 25 Z " />
+					  <path d=" M 15.251 11.072 L 34.75 11.072 L 34.75 25 L 15.251 25 L 15.251 11.072 Z "/>
+					  <path d=" M 31.965 11.072 L 34.751 11.072 L 34.751 25 L 31.965 25 L 31.965 11.072 Z "/>
+					  <path d=" M 18.035 8.286 L 20.821 8.286 L 20.821 11.072 L 18.035 11.072 L 18.035 8.286 Z "/>
+					  <path d=" M 29.179 8.286 L 31.965 8.286 L 31.965 11.072 L 29.179 11.072 L 29.179 8.286 Z "/>
+					  <path d=" M 31.965 36.143 L 31.965 33.357 L 18.035 33.357 L 18.035 36.143 L 23.607 36.143 L 23.607 41.714 L 20.821 41.714 L 20.821 44.5 L 29.178 44.5 L 29.178 41.714 L 26.393 41.714 L 26.393 36.143 L 31.965 36.143 Z "/>
+					  </g>
+				</svg>
+			</button>
+			<button style="background: transparent;display: block;" id="volume">
+				<svg id="volume-max" style="display: none;" width="26pt" height="26pt" version="1.1" viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg">
+					<g fill="#f5f5f5">
+						<path transform="scale(0.6)" d="m280 140v-70h140v420h-140v-70h-70v-70h-70v-140h70v-70zm210 20v-70h70v380h-70z" fill-rule="evenodd"></path>
+					</g>
+				</svg>
+				<svg id="volume-above-average" style="display: block;" width="26pt" height="26pt" version="1.1" viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg">
+					<g fill="#f5f5f5">
+						<path transform="scale(0.6)" d="m280 140v-70h140v420h-140v-70h-70v-70h-70v-140h70v-70zm210 70v-70h70v280h-70z" fill-rule="evenodd"></path>
+					</g>
+				</svg>
+				<svg id="volume-below-average" style="display: none;" width="26pt" height="26pt" version="1.1" viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg">
+					<g fill="#f5f5f5">
+						<path transform="scale(0.6)" d="m280 140v-70h140v420h-140v-70h-70v-70h-70v-140h70v-70zm210 140v-70h70v140h-70z" fill-rule="evenodd"/>
+					</g>
+				</svg>
+				<svg id="volume-min" style="display: none;" width="26pt" height="26pt" version="1.1" viewBox="0 0 450 350" xmlns="http://www.w3.org/2000/svg">
+					<g fill="#f5f5f5">
+						<path transform="scale(0.6)" d="m350 140v-70h140v420h-140v-70h-70v-70h-70v-140h70v-70z" fill-rule="evenodd"/>
+					</g>
+				</svg>
+			</button>
+		</div>
+	</div>
+	<div class="settings-description" id="list-description" style="text-align: end;" class="closed">
+		<span style="color:white;display:block;margin-bottom: 20px;" class="button-text">Донат</span>
+		<span style="color:white;display:block;margin-bottom: 20px;" class="button-text">Озвучка</span>
+		<span style="color:white;display:block;" class="button-text">Громкость</span>
+	</div>
+	<div class="content">
+		<h1 class="glitch" id="timer" style="text-align: center;"></h1>
+		<p id="quote" style="text-align: center;"></p>
+		<div id="button-controls"> 
+			<button class="buttons-wrapper left" style="background: none;"> 
+				<div class="button-container"> 
+					<div class="button-left button"> 
+						<div class="dot dot-1"></div> 
+						<div class="dot dot-2"></div> 
+						<div class="dot dot-3"></div> 
+						<div class="dot dot-4"></div> 
+						<div class="dot dot-5"></div> 
+					</div> 
+				</div> 
+				<div class="button-container"> 
+					<div class="button-left button"> 
+						<div class="dot dot-1"></div> 
+						<div class="dot dot-2"></div> 
+						<div class="dot dot-3"></div> 
+						<div class="dot dot-4"></div> 
+						<div class="dot dot-5"></div> 
+					</div> 
+				</div> 
+			</button> 
+			<button class="buttons-wrapper play" style="background: none;"> 
+				<div class="button-container"> 
+					<div class="button-play button paused"> 
+						<div class="dot dot-1"></div> 
+						<div class="dot dot-2"></div> 
+						<div class="dot dot-3"></div> 
+						<div class="dot dot-4"></div> 
+						<div class="dot dot-5"></div> 
+					</div> 
+				</div> 
+			</button> 
+			<button class="buttons-wrapper right" style="background: none;"> 
+				<div class="button-container"> 
+					<div class="button-right button"> 
+						<div class="dot dot-1"></div> 
+						<div class="dot dot-2"></div> 
+						<div class="dot dot-3"></div> 
+						<div class="dot dot-4"></div> 
+						<div class="dot dot-5"></div> 
+					</div> 
+				</div> 
+				<div class="button-container"> 
+					<div class="button-right button"> 
+						<div class="dot dot-1"></div> 
+						<div class="dot dot-2"></div>
+						<div class="dot dot-3"></div> 
+						<div class="dot dot-4"></div> 
+						<div class="dot dot-5"></div> 
+					</div> 
+				</div> 
+			</button> 
+		</div>
+		<div class="button-vol"> 
+			<input id="button-vol-input" type="range" value="100" min="0" max="100"> 
+		</div>	
+		
+		<ul style="display: none;" id="names-list">
+			{{range .Music}}
+				<li>{{.}}</li>
+			{{end}}
+		</ul>
+	</div>
+
+	<script defer src="/static/js/defer.js" type="application/javascript"></script>
+	<script src="/static/js/index.js" type="application/javascript"></script>
+</body>
+</html>
