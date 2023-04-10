@@ -31,9 +31,7 @@
 <!-- CONTACT -->
 ## Контакт / Contact
 
-Автор: [Владислав Радченко](https://github.com/wladradchenko/)
-
-Автор PWA: [Андрей Воронин](https://github.com/AVor0n/)
+Авторы: [Владислав Радченко](https://github.com/wladradchenko/), [Андрей Воронин](https://github.com/AVor0n/)
 
 Почта: [i@wladradchenko.ru](i@wladradchenko.ru)
 
