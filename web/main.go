@@ -1,5 +1,6 @@
 package main
 // build GOOS=linux GOARCH=amd64 CGO_ENABLED=0 // go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o radio main.go
+// go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o radio main.go
 
 import (
 	"encoding/json"
@@ -69,9 +70,14 @@ func main() {
 	numVoice := make(map[string][]string)
 
 	for music := range c {
-		numVoice[music.Genre] = append(numVoice[music.Genre], music.URL)
+		if music.Genre == "custom" {
+			genreMap["custom"] = append(genreMap["custom"], music.URL)
+		} else {
+			numVoice[music.Genre] = append(numVoice[music.Genre], music.URL)
+		}
 	}
 
+	fmt.Println("Files today: %s\n", len(genreMap["custom"])) 
 	// Print the number of values for each key in the map
 	fmt.Println("Voice loads")
 	for key, val := range numVoice {
@@ -200,26 +206,96 @@ func handleRoot(genres map[string][]string) func(w http.ResponseWriter, r *http.
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-		var names []string
+		// Start the ticker that ticks every 12 hours
+		ticker := time.NewTicker(12 * time.Hour)
 
-		// Get the filter query parameter
-		filter := r.FormValue("filter")
-		if len(filter) == 0 {
-			names = genres["lofi"]
-		} else {
-			val, status := genres[filter]
-			if status {
-				names = val
-			} else {
-				names = genres["lofi"]
+		// Run the action in a separate goroutine
+		go func() {
+			for {
+				select {
+				case <-ticker.C:
+					// do something every 12 hours
+					var wg sync.WaitGroup
+					c := make(chan ServerMusic)
+
+					serverMusicList := []ServerMusic{
+						{URL: "https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/", Genre: "custom", MaxRand: 1500, NumIter: 260},
+					}
+
+					for _, music := range serverMusicList {
+						for i := 0; i < music.NumIter; i++ {
+							randInt := rand.Intn(music.MaxRand) + 1
+							urlMusic := music.URL + strconv.Itoa(randInt) + ".mp3"
+
+							wg.Add(1)
+							go checkMusicFile(urlMusic, &wg, c, music.Genre)
+						}
+					}
+
+					go func() {
+						wg.Wait()
+						close(c)
+					}()
+
+					// Set genre
+					genreMap := make(map[string][]string)
+
+					for name := range c {
+						genreMap["custom"] = append(genreMap["custom"], name.URL)
+					}
+
+					if len(genreMap["custom"]) > 0 {
+						genres["custom"] = genreMap["custom"]
+						fmt.Printf("Files today: %s\n", len(genres["custom"]))
+					}
+
+					// Read the radio stations from the JSON file
+					radioFile := "./static/radio/radio.json"
+					radios, err := readRadiosFromFile(radioFile)
+					if err != nil {
+						fmt.Printf("Error reading radios from file: %s\n", err)
+						return
+					}
+
+					// Check each radio URL and collect the ones that are valid
+					radioChan := make(chan Radio)
+					for _, radio := range radios {
+						wg.Add(1)
+						go checkRadio(radio, &wg, radioChan)
+					}
+					go func() {
+						wg.Wait()
+						close(radioChan)
+					}()
+
+					// Collect the results and print them
+					var validRadios []Radio
+					for radio := range radioChan {
+						validRadios = append(validRadios, radio)
+					}
+
+					fmt.Printf("Radios found: %d \n", len(validRadios))
+					for _, radio := range validRadios {
+						genres[radio.Genre] = append(genres[radio.Genre], radio.Url)
+					}
+				}
+			}
+		}()
+
+		// Initialize an empty map to store the music genres and names
+		music := make(map[string]string)
+
+		// Iterate over the genres map and generate a random name for each genre
+		for genre, names := range genres {
+			if len(names) > 0 {
+				// Generate a random index to select a name from the list
+				randIndex := rand.Intn(len(names))
+				music[genre] = names[randIndex]
 			}
 		}
 
-		fmt.Println(filter)
-		// Generate an initial list of random names from the filtered list
-		music := generateNames(names, 1) // set number from 1 to n
 		fmt.Println(music)
-		
+	
 		// Load the HTML template file
 		tmpl, err := template.ParseFiles("static/html/index.html")
 		if err != nil {
@@ -228,11 +304,9 @@ func handleRoot(genres map[string][]string) func(w http.ResponseWriter, r *http.
 
 		// Render the template with the list of names and the filter query parameter
 		data := struct {
-			Music  []string
-			Filter string
+			Music  map[string]string
 		}{
 			Music:  music,
-			Filter: filter,
 		}
 		err = tmpl.Execute(w, data)
 		if err != nil {
@@ -249,34 +323,25 @@ func handleEvents(genres map[string][]string, voices map[string][]string) func(w
 		w.Header().Set("Cache-Control", "no-cache")
 		w.Header().Set("Connection", "keep-alive")
 
-		var names []string
-
-		// Parse the filter parameter from the URL query
-		// filter := r.URL.Query().Get("filter")
-		filter := r.FormValue("filter")
-
-		if len(filter) == 0 {
-			names = genres["lofi"]
-		} else {
-			val, status := genres[filter]
-			if status {
-				names = val
-			} else {
-				names = genres["lofi"]
-			}
-		}
-
 		// Send a "ping" message to keep the connection open
 		fmt.Fprintln(w, "event: ping\ndata: {}\n\n")
 		w.(http.Flusher).Flush()
 
+		// Initialize an empty map to store the music genres and names
+		music := make(map[string]string)
+
 		// Send Server-Sent Events (SSE) every second
 		for {
-			// Wait for 60 second
-			time.Sleep(1 * time.Second)
+			// Iterate over the genres map and generate a random name for each genre
+			for genre, names := range genres {
+				if len(names) > 0 {
+					// Generate a random index to select a name from the list
+					randIndex := rand.Intn(len(names))
+					music[genre] = names[randIndex]
+				}
+			}
 
-			// Generate a new random name based on the filter
-			name := generateName(names)
+			fmt.Println(music)
 
 			// Create a data object with the name and voice fields
 			voiceMap := make(map[string]string)
@@ -286,10 +351,10 @@ func handleEvents(genres map[string][]string, voices map[string][]string) func(w
 			}
 
 			data := struct {
-				Name  string `json:"name"`
+				Name  map[string]string `json:"name"`
 				Voice map[string]string `json:"voice"`
 			}{
-				Name:  name,
+				Name:  music,
 				Voice: voiceMap,
 			}
 
@@ -303,6 +368,9 @@ func handleEvents(genres map[string][]string, voices map[string][]string) func(w
 			// Send the name as a Server-Sent Event (SSE)
 			fmt.Fprintf(w, "data: %s\n\n", string(jsonData))
 			w.(http.Flusher).Flush()
+
+			// Wait for 60 second
+			time.Sleep(1 * 60 * time.Second)
 		}
 	}
 }
