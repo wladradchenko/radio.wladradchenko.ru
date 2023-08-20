@@ -3,6 +3,7 @@
 [![GitHub package version](https://img.shields.io/github/v/release/wladradchenko/radio.wladradchenko.ru?display_name=tag&sort=semver)](https://github.com/wladradchenko/radio.wladradchenko.ru)
 [![License: MIT v1.0](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wladradchenko/radio.wladradchenko.ru/blob/main/LICENSE)
 
+<p align="right">(<a href="README.md">EN</a>)</p>
 <div id="top"></div>
 
 <br />
@@ -27,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## О проекте / About The Project
 
-Бесконечное нейронное радио — этот проект веб-оболочка, которая позволяет пользователям слушать персонализированную коллекцию музыки lofi (часть которой создано нейронной сетью), а также некоторые радиостанции и время от времени наслаждаться голосом радиоведущего на основе нейронной сети. 
+Бесконечное нейронное радио — этот проект веб-оболочка, которая позволяет пользователям слушать персонализированную коллекцию музыки lofi (которая создано нейронной сетью [Audiocraft](https://github.com/facebookresearch/audiocraft)), а также некоторые радиостанции и время от времени наслаждаться голосом радиоведущего на основе нейронной сети сгенерированного в приложении [Wunjo AI](https://github.com/wladradchenko/wunjo.wladradchenko.ru). 
 
 Серверная часть платформы построена на Go, а внешний интерфейс реализован на JavaScript с применем AJAX, что обеспечивает удобный и интуитивно понятный пользовательский интерфейс.  
 
@@ -36,7 +37,9 @@
 <!-- CONTACT -->
 ## Контакт / Contact
 
-Авторы: [Владислав Радченко](https://github.com/wladradchenko/), [Андрей Воронин](https://github.com/AVor0n/)
+Авторы: 
+- [Владислав Радченко](https://github.com/wladradchenko/)
+- [Андрей Воронин](https://github.com/AVor0n/) (доработки по PWA части приложения)
 
 Почта: [i@wladradchenko.ru](i@wladradchenko.ru)
 
