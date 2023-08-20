@@ -15,7 +15,7 @@
   <h3 align="center">Infinite Neural Radio</h3>
 
   <p align="center">
-    Documentation.
+    Documentation
     <br/>
     <br/>
     <br/>
@@ -34,17 +34,17 @@ The back-end of the platform is built on Go, while the front-end is implemented 
 
 In addition, the project offers a PWA app that users can install on their phones to access endless neural radio and change tracks on the go. Whether you're a fan of lofi music, neural networks, or both, Infinite Neural Radio offers a new and fun way to discover and enjoy new sounds.
 
-Also, I would like to note that gif animation, quotes, podcast text are also created by neural networks.
+Also, I would like to note that gif animation, quotes, podcast text are also created by neural networks. English version radio.wladradchenko.ru/eng and russian version radio.wladradchenko.ru/rus
 <!-- CONTACT -->
 
 ## Contact
 
 Authors: 
-- [Владислав Радченко](https://github.com/wladradchenko/)
-- [Андрей Воронин](https://github.com/AVor0n/) (improvements on the PWA part of the application)
+- [Wladislav Radchenko](https://github.com/wladradchenko/)
+- [Andrey Voronin](https://github.com/AVor0n/) (improvements on the PWA part of the application)
 
 Email: [i@wladradchenko.ru](i@wladradchenko.ru)
 
-Project: [Бесконечное нейронное радио](https://radio.wladradchenko.ru)
+Project: [Infinite Neural Radio](https://radio.wladradchenko.ru)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
