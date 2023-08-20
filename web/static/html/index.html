@@ -14,14 +14,13 @@
 <body style="max-height: 100vh;overflow-y: hidden;overflow-x: hidden;">
 	<div class="main">
 		<div id="notification-banner" style="display: none;">
-			<p>Слушать нейронное радио на <a href="https://radio.wladradchenko.ru">radio.wladradchenko.ru</a></button>
+			<button id="install-pwa" style="background: none;border: none;text-decoration: underline;cursor: pointer;padding: 0;font-size: inherit;">Установить приложение</button>
 			<button id="close-banner">&times;</button>
 		</div>		  
 		<img class="background-img" src="/static/assets/amp_prob.gif">
 	</div>
 	<div class="multi-select">
 		<select class="custom-select" id="name-filter" style="transform: scale(1.2);">
-			<option value="lofi">Lo-Fi</option>
 		</select>
 	</div>	
 	<div class="settings">
@@ -121,9 +120,9 @@
 		</div>
 	</div>
 	<div class="settings-description" id="list-description" style="text-align: end;" class="closed">
-		<span style="color:white;display:block;margin-bottom: 20px;" class="button-text">Донат</span>
-		<span style="color:white;display:block;margin-bottom: 20px;" class="button-text">Озвучка</span>
-		<span style="color:white;display:block;" class="button-text">Громкость</span>
+		<span id="donat-text" style="color:white;display:block;margin-bottom: 20px;" class="button-text">Донат</span>
+		<span id="voice-text" style="color:white;display:block;margin-bottom: 20px;" class="button-text">Озвучка</span>
+		<span id="volume-text" style="color:white;display:block;" class="button-text">Громкость</span>
 	</div>
 	<div class="content">
 		<h1 class="glitch" id="timer" style="text-align: center;"></h1>
@@ -182,13 +181,11 @@
 			</button> 
 		</div>
 		<div class="button-vol"> 
-			<input id="button-vol-input" type="range" value="100" min="0" max="100"> 
+			<input id="button-vol-input" type="range" value="100" min="0" max="100" disabled> 
 		</div>	
 		
 		<ul style="display: none;" id="names-list">
-			{{range .Music}}
-				<li>{{.}}</li>
-			{{end}}
+			<li custom="https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/88.mp3"></li>
 		</ul>
 	</div>
 
