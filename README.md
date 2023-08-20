@@ -36,7 +36,7 @@ The back-end of the platform is built on Go, while the front-end is implemented 
 
 In addition, the project offers a PWA app that users can install on their phones to access endless neural radio and change tracks on the go. Whether you're a fan of lofi music, neural networks, or both, Infinite Neural Radio offers a new and fun way to discover and enjoy new sounds.
 
-Also, I would like to note that gif animation, quotes, podcast text are also created by neural networks. [English version](https://radio.wladradchenko.ru/eng) and [Russian version](https://radio.wladradchenko.ru)
+Also, I would like to note that gif animation, quotes, podcast text are also created by neural networks. [English](https://radio.wladradchenko.ru/eng) and [Russian version](https://radio.wladradchenko.ru)
 <!-- CONTACT -->
 
 ## Contact
