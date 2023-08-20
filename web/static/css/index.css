@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'Hardpixel';
-  src: url('/static/fonts/Hardpixel.eot') format('embedded-opentype');  /* IE9*/
+  src: url('/static/fonts/Hardpixel.woff2') format('woff2');  /* chrome firefox */
   src: url('/static/fonts/Hardpixel_iefix.eot') format('embedded-opentype'),  /* IE6-IE8 */
-        url('/static/fonts/Hardpixel.woff2') format('woff2'),  /* chrome firefox */
+  url('/static/fonts/Hardpixel.eot') format('embedded-opentype'),  /* IE9*/
         url('/static/fonts/Hardpixel.woff') format('woff'),  /* chrome firefox */
         url('/static/fonts/Hardpixel.ttf') format('ttf'),  /* chrome firefox opera Safari, Android, iOS 4.2+*/
         url('/static/fonts/Hardpixel.svg') format('svg');  /* iOS 4.1- */
@@ -10,7 +10,7 @@
   font-style: normal;
 }
   
-  
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -382,6 +382,10 @@
     right: 30px;
     bottom: 65px;
   }
+
+  .button-vol {
+    width: 80vw;
+  }
 }
 
 /* Desktop */
@@ -414,6 +418,14 @@
     transform: translateX(-50%);
     right: 30px;
     top: 65px;
+  }
+
+  .button-vol {
+    width: 40vw;
+  }
+
+  #quote {
+    font-size: max(1.0vw, 14px);
   }
 }
 
