@@ -9,7 +9,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/wladradchenko/radio.wladradchenko.ru">
-    <img src="web/static/ico/icon.svg" alt="Logo" width="80" height="80">
+    <img src="web/static/ico/mipmap-xxxhdpi/ic_launcher_round.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">Бесконечное нейронное радио</h3>
