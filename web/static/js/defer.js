@@ -1,18 +1,50 @@
+// GET MULTI-SELECT OPTIONS //
+// Load the radio data from radio.json
+fetch('/static/radio/radio.json')
+    .then(response => response.json())
+    .then(data => {
+        let optionsSet = {};
+        data.forEach(item => {
+        optionsSet[item.genre] = item.name;
+        });
+
+        let options = [`<option value="custom">Wladradchenko</option>`];
+        for (let genre in optionsSet) {
+            options.push(`<option value="${genre}">${optionsSet[genre]}</option>`);
+        }
+
+        let multiSelect = document.querySelector('#name-filter');
+        let rangeSelect = document.createRange();
+        let fragmentSelect = rangeSelect.createContextualFragment(options.join('\n'));
+        multiSelect.appendChild(fragmentSelect);
+    })
+    .catch(error => {
+        console.error('Error fetching radio data:', error);
+    });
+// GET MULTI-SELECT OPTIONS //
+
 
 // SET START EVENT LISTENER ON DEFAULT //
-let source = new EventSource("/events?filter=lofi");
+let source = new EventSource("/events");
 source.onmessage = function(event) {
     var data = JSON.parse(event.data);
     var namesList = document.getElementById("names-list");
     // Remove the first item
-    namesList.removeChild(namesList.childNodes[0]);
+    // Remove all existing items
+    while (namesList.firstChild) {
+        namesList.removeChild(namesList.firstChild);
+    }
     // Add a new random name to the end
     var newItem = document.createElement("li");
-    var newText = document.createTextNode(data.name);
+    // Add a new item for each key-value pair
+    for (var genreItem in data.name) {
+        var newGenre = document.createAttribute(genreItem);
+        newGenre.value = data.name[genreItem];
+        newItem.setAttributeNode(newGenre);
+    }
     var newVoice = document.createAttribute("voice");
     newVoice.value = JSON.stringify(data.voice);
     newItem.setAttributeNode(newVoice);
-    newItem.appendChild(newText);
     namesList.appendChild(newItem);
 }
 // SET START EVENT LISTENER ON DEFAULT //
