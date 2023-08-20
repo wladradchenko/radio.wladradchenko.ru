@@ -28,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Infinite Neural Radio is a web shell project that allows users to listen to a personalized collection of lofi music (which is created by the neural network [Audiocraft](https://github.com/facebookresearch/audiocraft)) as well as some radio stations and occasionally enjoy voice of a radio host based on a neural network generated in the application [Wunjo AI] (https://github.com/wladradchenko/wunjo.wladradchenko.ru).
+Infinite Neural Radio is a web shell project that allows users to listen to a personalized collection of lofi music (which is created by the neural network [Audiocraft](https://github.com/facebookresearch/audiocraft)) as well as some radio stations and occasionally enjoy voice of a radio host based on a neural network generated in the application [Wunjo AI](https://github.com/wladradchenko/wunjo.wladradchenko.ru).
 
 The goal of the project is to create non-stop musical compositions and a podcast for comfortable work, leisure and evening time.
 
