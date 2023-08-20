@@ -29,12 +29,29 @@ window.addEventListener(
 
     const closeBannerBtn = document.getElementById('close-banner');
     const playMusicBannerBtn = document.querySelector('.play');
+    const pwaInstallBtn = document.getElementById('install-pwa');
 
     closeBannerBtn.addEventListener('click', () => {
         notificationBanner.style.display = 'none';
     });
 
     playMusicBannerBtn.addEventListener('click', () => {
+        notificationBanner.style.display = 'none';
+    });
+
+    pwaInstallBtn.addEventListener('click', () => {
+        // Get the current URL path
+        const currentPath = window.location.pathname;
+        // Extract the language code from the path
+        const languageCode = currentPath.split('/')[1];
+
+        if (languageCode === "eng") {
+            alert("After installing the application on your device, turn on the notification to play media content in your browser to control the player on the lock screen.");
+        } else {
+            alert("После установки приложения на ваше устройство включите уведомление для воспроизведения медиаконтента в своем браузере, чтобы управлять плеером на экране блокировки.");
+        
+        }
+        event.prompt();
         notificationBanner.style.display = 'none';
     });
 
@@ -48,37 +65,13 @@ window.addEventListener(
   
 // SERVICE WORKER BLOCK
 
+
 // HANDLE EVENT BLOCK //
 document.getElementById("name-filter").addEventListener("change", function() {
     var filter = this.value;
-    // Send an AJAX request to the server with the filter parameter
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Reset the source.onmessage function
-            source.onmessage = null;
-            // Update the EventSource with the new filter value
-            source = new EventSource("/events?filter=" + filter);
-            // Update the names list with the new data
-            source.onmessage = function(event) {
-                var data = JSON.parse(event.data);
-                var namesList = document.getElementById("names-list");
-                // Remove the first item
-                namesList.removeChild(namesList.childNodes[0]);
-                // Add a new random name to the end
-                var newItem = document.createElement("li");
-                var newText = document.createTextNode(data.name);
-                var newVoice = document.createAttribute("voice");
-                newVoice.value = JSON.stringify(data.voice);
-                newItem.setAttributeNode(newVoice);
-                newItem.appendChild(newText);
-                namesList.appendChild(newItem);
-            }
-        }
-    };
-    xhttp.open("POST", "/", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("filter=" + filter);
+    // Voice will work only in custom radio
+    muteVoice(filter);
+    canPlay();
 });
 // HANDLE EVENT BLOCK //
 
@@ -128,15 +121,32 @@ let prevAudio;
 let prevVoice = 0;
 
 function playSong() {
+    let filter = document.getElementById("name-filter").value;
+    if (filter === "") {
+        filter = "custom"
+    }
+
     let lis = document.querySelectorAll('#names-list li');
 
     let nextLi = lis[lis.length - 1];
-    let nextSrc = nextLi.textContent;
+    let nextSrc = nextLi.getAttribute(filter);
 
     prevAudio = audio.src;
     audio.src = nextSrc;
-    // audio.autoplay = true;
-}
+};
+
+function canPlay() {
+    audio.pause();
+    playSong();
+    setMediaMetadata(null);
+    // Wait for the new audio source to be loaded before playing it
+    buttonSwitch.classList.remove('playing');
+    buttonSwitch.classList.add('playing');
+    audio.addEventListener('canplay', function() {
+        audio.play(); //TODO
+    });
+};
+
 
 audio.addEventListener('ended', playSong);
 playSong();
@@ -147,40 +157,92 @@ const buttonPlay = document.querySelector('.play');
 const buttonSwitch = document.querySelector('.button-play');
 
 const onPlayBtnClick = () => {
-if (audio.paused) {
-    audio.autoplay = true;
-    voice.autoplay = true;
-    
-    audio.play();
-    buttonSwitch.classList.add('playing');
-    // set podcast or play from pause
-    if (voice.currentTime != 0) {
-            voice.play(); // user already listening podcast
+    if (audio.paused) {
+        audio.autoplay = true;
+        voice.autoplay = true;
+        
+        audio.play();
+        buttonSwitch.classList.add('playing');
+        // set podcast or play from pause
+        if (voice.currentTime != 0) {
+                if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
+                    voice.volume = 0;
+                } else {
+                    voice.play(); // user already listening podcast
+                    voice.volume = 1;
+                }
+        } else {
+                playVoice(); // user not listening podcast yet
+        }
     } else {
-            playVoice(); // user not listening podcast yet
-    }
-} else {
-    audio.pause();
-    buttonSwitch.classList.remove('playing');
-    // turn off podcast
+        audio.pause();
+        buttonSwitch.classList.remove('playing');
+        // turn off podcast
         voice.pause();
-}
+    }
 };
 buttonPlay.addEventListener('click', onPlayBtnClick);
 navigator.mediaSession.setActionHandler('play', onPlayBtnClick);
 navigator.mediaSession.setActionHandler('pause', onPlayBtnClick);
-navigator.mediaSession.setActionHandler('stop', onPlayBtnClick);
+
+function onStopBtnClick() {
+    // Stop the audio playback
+    audio.pause();
+    audio.currentTime = 0;
+  
+    // Clear any existing media session metadata and action handlers
+    navigator.mediaSession.metadata = null;
+  
+    // Update the playback state to stopped
+    navigator.mediaSession.playbackState = 'stopped';
+  
+    // Close the PWA
+    window.close();
+}
+  
+navigator.mediaSession.setActionHandler('stop', onStopBtnClick);
+
+function changeOptionByClick(reverse = false) {
+    // Get a reference to the select element
+    var selectElement = document.getElementById("name-filter");
+    
+    // Determine the new selected index based on whether or not we're reversing the order
+    var selectedIndex;
+    if (reverse) {
+        if (selectElement.selectedIndex == 0) {
+            selectedIndex = selectElement.options.length - 1;
+        } else {
+            selectedIndex = selectElement.selectedIndex - 1;
+        }
+    } else {
+        if (selectElement.selectedIndex == selectElement.options.length - 1) {
+            selectedIndex = 0;
+        } else {
+            selectedIndex = selectElement.selectedIndex + 1;
+        }
+    }
+    
+    // Set the new selected index
+    selectElement.selectedIndex = selectedIndex;
+
+    // Trigger the change event on the select element
+    selectElement.dispatchEvent(new Event('change'));
+
+    var filter = selectElement.value;
+    // Voice will work only in custom radio
+    muteVoice(filter);
+}
+
 
 const buttonRefresh = document.querySelector('.right');
 const onNextBtnClick = () => {
-    playSong();
-    audio.play();
+    changeOptionByClick(false);
+    canPlay();
 };
-// buttonRefresh.addEventListener('click', onNextBtnClick);
+
 buttonRefresh.addEventListener('click', function() {
-    playSong();
-    audio.play();
-    setMediaMetadata(null);
+    changeOptionByClick(false);
+    canPlay();
 });
 navigator.mediaSession.setActionHandler('nexttrack', onNextBtnClick);
 
@@ -188,30 +250,73 @@ setMediaMetadata("Wladradchenko");
 
 const buttonPrev = document.querySelector('.left');
 const onPrevBtnClick = () => {
-if (prevAudio.length > 0) {
-    audio.src = prevAudio;
-    audio.play();
-}
+    changeOptionByClick(true);
+    canPlay();
 };
-//buttonPrev.addEventListener('click', onPrevBtnClick);
+
 buttonPrev.addEventListener('click', function() {
-    audio.src = prevAudio;
-    audio.play();
-    setMediaMetadata(null);
+    changeOptionByClick(true);
+    canPlay();
 });
 navigator.mediaSession.setActionHandler('previoustrack', onPrevBtnClick);
 
-document.getElementById("name-filter").addEventListener("change", function() {
-    // Get option value
-    var filter = this.value;
-    setMediaMetadata(null);
+// Create function to get list of voices as attr
+function podcatGenerator() {
+    // Get voice attr and create sort list
+    let objVoice = JSON.parse(document.querySelectorAll('#names-list li')[0].getAttribute('voice'));
+    let lisVoice = Object.values(objVoice).sort((a, b) => parseInt(a) - parseInt(b));
 
-    // Call playSong() function here
-    setTimeout(function() {
-        playSong();
-    }, 2000);
+    // Work is folder is language
+    // Get all keys from objVoice
+    const lisVoiceLang = Object.keys(objVoice);
 
-    if (voiceButtonOn.style.display == 'block') {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Extract the language code from the path
+    const languageCode = currentPath.split('/')[1];
+
+    // Construct URLs using keys and extracted language code
+    if (lisVoiceLang.includes(languageCode)) {
+        voice.src = objVoice[languageCode];
+    } else {
+        voice.src = objVoice["rus"];
+    }
+
+    // TODO: Uncommit if I will wanna to work with not lang, with int
+    // voice.src = lisVoice[prevVoice];
+
+    if (audio.played) {
+        voice.play();
+        audio.volume = 0.35;
+    }
+
+    if (prevVoice != lisVoice.length - 1) {
+        // prevVoice += 1; TODO (if need to read a few news)
+        prevVoice = 0
+    } else {
+        prevVoice = 0;
+    }
+}
+
+function playVoice() {
+    if (voice.currentTime == 0 && prevVoice == 0) {
+        const nextPlayTime = Math.floor(Math.random() * (10 * 60 * 1000)) + 15 * 60 * 1000; // Random time between 1 minutes and 2 minutes
+        setTimeout(podcatGenerator, nextPlayTime);
+    } else if (voice.currentTime == 0 && prevVoice != 0) {
+        // Set a timeout to play the voice file again after a random amount of time
+        podcatGenerator()
+    }
+}
+
+function muteVoice(filter) {
+    if (filter != 'custom') {
+        // User change radio, than mute off podcats
+        // console.log("Turn Off Voice")
+        voiceButtonOn.style.display = 'none';
+        voiceButtonOff.style.display = 'block';
+        voice.volume = 0;
+    } else if (filter == 'custom' && voiceButtonOn.style.display == 'block') {
         // User turned on podcast and listen wladradchenko radio, than mute on
         // console.log("Turn On Voice")
         voice.volume = 1;
@@ -219,42 +324,12 @@ document.getElementById("name-filter").addEventListener("change", function() {
         // User on wladradchenko radio, but podacts turned off, than mute ff
         // console.log("Turn Off Voice")
         voice.volume = 0;
-}
-});
-
-// Create function to get list of voices as attr
-function podcatGenerator() {
-// Get voice attr and create sort list
-let objVoice = JSON.parse(document.querySelectorAll('#names-list li')[0].getAttribute('voice'));
-let lisVoice = Object.values(objVoice).sort((a, b) => parseInt(a) - parseInt(b));
-
-voice.src = lisVoice[prevVoice];
-
-if (audio.played) {
-    voice.play();
-    audio.volume = 0.35;
-}
-
-if (prevVoice != lisVoice.length - 1) {
-    prevVoice += 1;
-} else {
-    prevVoice = 0;
-}
-}
-
-function playVoice() {
-if (voice.currentTime == 0 && prevVoice == 0) {
-    const nextPlayTime = Math.floor(Math.random() * (1 * 60 * 60 * 1000)) + 3 * 60 * 60 * 1000; // Random time between 60 minutes and 180 minutes
-    setTimeout(podcatGenerator, nextPlayTime);
-} else if (voice.currentTime == 0 && prevVoice != 0) {
-    // Set a timeout to play the voice file again after a random amount of time
-    podcatGenerator()
-}
+    }
 }
 
 function endedVoice() {
-voice.currentTime = 0;
-playVoice();
+    voice.currentTime = 0;
+    playVoice();
 }
 
 voice.addEventListener('ended', endedVoice);
@@ -263,22 +338,39 @@ voice.addEventListener('ended', endedVoice);
 
 // UPDATE QUOTE BLOCK //
 function updateQuote() {
-// Fetch the JSON data
-fetch('/static/quotes/quotes.json')
-.then(response => response.json())
-.then(data => {
-// Select a random quote
-const randomIndex = Math.floor(Math.random() * data.length);
-const quote = data[randomIndex];
+    var quotes_url;
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+    // Extract the language code from the path
+    const languageCode = currentPath.split('/')[1];
 
-// Update the quote element
-const quoteElement = document.querySelector('#quote');
-if (quote.author == null){
-    quoteElement.textContent = `"${quote.text}"`;
-} else {
-    quoteElement.textContent = `"${quote.text}" - ${quote.author}`;
-}
-});
+    if (languageCode === "eng") {
+        quotes_url = '/static/quotes/quotes_eng.json';
+        document.querySelector("#list-description").style.marginRight = "10pt";
+        document.querySelector("#donat-text").innerText = "Donat";
+        document.querySelector("#voice-text").innerText = "Podcast";
+        document.querySelector("#volume-text").innerText = "Volume";
+        document.querySelector("#install-pwa").innerText = "Install application";
+        document.title = "Neural Radio"
+    } else {
+        quotes_url = '/static/quotes/quotes.json';
+    }
+    // Fetch the JSON data
+    fetch(quotes_url)
+        .then(response => response.json())
+        .then(data => {
+        // Select a random quote
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const quote = data[randomIndex];
+
+        // Update the quote element
+        const quoteElement = document.querySelector('#quote');
+        if (quote.author == null){
+            quoteElement.textContent = `"${quote.text}"`;
+        } else {
+            quoteElement.textContent = `"${quote.text}" - ${quote.author}`;
+        }
+    });
 }
 
 // Call the updateQuote function immediately
@@ -334,16 +426,20 @@ const voiceButton = document.querySelector('#voice');
 const voiceButtonOn = voiceButton.querySelector('#voice-on-button');
 const voiceButtonOff = voiceButton.querySelector('#voice-off-button');
 
+function voiceChangeButton() {
+    if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
+        voiceButtonOn.style.display = 'block';
+        voiceButtonOff.style.display = 'none';
+        voice.volume = 1;
+    } else {
+        voiceButtonOn.style.display = 'none';
+        voiceButtonOff.style.display = 'block';
+        voice.volume = 0;
+    }
+};
+
 voiceButton.addEventListener('click', function() {
-if (voiceButtonOn.style.display == 'none') {
-    voiceButtonOn.style.display = 'block';
-    voiceButtonOff.style.display = 'none';
-    voice.volume = 1;
-} else {
-    voiceButtonOn.style.display = 'none';
-    voiceButtonOff.style.display = 'block';
-    voice.volume = 0;
-}
+    voiceChangeButton();
 });
 // SETTINGS BUTTOMS BLOCK //
 
@@ -377,3 +473,14 @@ function setMediaMetadata(selectNameSet = null) {
       navigator.mediaSession.metadata = metadataNewSession;
     }, 500);
   }
+
+
+// IF AUDIO IS BROKEN //
+audio.addEventListener('error', (event) => {
+    // Handle the error here
+    console.error('Error loading audio file:', event.target.error.message);
+  
+    // Revert to a default audio file
+    audio.src = 'https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/88.mp3';
+});
+// IF AUDIO IS BROKEN //
