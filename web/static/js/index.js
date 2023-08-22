@@ -286,9 +286,9 @@ function podcatGenerator() {
     // TODO: Uncommit if I will wanna to work with not lang, with int
     // voice.src = lisVoice[prevVoice];
 
-    if (audio.played) {
+    if (!audio.paused) {  // If the audio is currently playing
         voice.play();
-        audio.volume = 0.35;
+        audio.volume = 0.1;
     }
 
     if (prevVoice != lisVoice.length - 1) {
