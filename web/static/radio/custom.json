@@ -1,5 +1,0 @@
-[
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/", "genre": "custom", "max_rand": 60, "num_iter": 30},
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/rus/", "genre": "rus", "max_rand": 12, "num_iter": 12},
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/eng/", "genre": "eng", "max_rand": 10, "num_iter": 10}
-]
