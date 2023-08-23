@@ -168,8 +168,10 @@ const onPlayBtnClick = () => {
                 if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
                     voice.volume = 0;
                 } else {
-                    voice.play(); // user already listening podcast
-                    voice.volume = 1;
+                    if (!audio.paused) { 
+                        voice.play(); // user already listening podcast
+                        voice.volume = 1;
+                    }
                 }
         } else {
                 playVoice(); // user not listening podcast yet
