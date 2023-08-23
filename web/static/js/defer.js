@@ -30,13 +30,11 @@ source.onmessage = function(event) {
     var data = JSON.parse(event.data);
     var namesList = document.getElementById("names-list");
     // Remove the first item
-    // Remove all existing items
     while (namesList.firstChild) {
         namesList.removeChild(namesList.firstChild);
     }
     // Add a new random name to the end
     var newItem = document.createElement("li");
-    // Add a new item for each key-value pair
     for (var genreItem in data.name) {
         var newGenre = document.createAttribute(genreItem);
         newGenre.value = data.name[genreItem];
