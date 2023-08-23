@@ -158,31 +158,29 @@ const buttonSwitch = document.querySelector('.button-play');
 
 const onPlayBtnClick = () => {
     if (audio.paused) {
-        audio.autoplay = true;
-        voice.autoplay = true;
-        
         audio.play();
         buttonSwitch.classList.add('playing');
-        // set podcast or play from pause
+
+        // Check if voice should be played
         if (voice.currentTime != 0) {
-                if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
-                    voice.volume = 0;
-                } else {
-                    if (!audio.paused) { 
-                        voice.play(); // user already listening podcast
-                        voice.volume = 1;
-                    }
+            if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
+                voice.volume = 0;
+            } else {
+                if (!audio.paused) { 
+                    voice.play(); // user already listening podcast
+                    voice.volume = 1;
                 }
+            }
         } else {
-                playVoice(); // user not listening podcast yet
+            playVoice(); // user not listening podcast yet
         }
     } else {
         audio.pause();
         buttonSwitch.classList.remove('playing');
-        // turn off podcast
-        voice.pause();
+        voice.pause();  // turn off podcast
     }
 };
+
 buttonPlay.addEventListener('click', onPlayBtnClick);
 navigator.mediaSession.setActionHandler('play', onPlayBtnClick);
 navigator.mediaSession.setActionHandler('pause', onPlayBtnClick);
