@@ -34,7 +34,7 @@ func main() {
 	fmt.Println("Program starting... Waiting a minute while the code checks radio points.")
 
 	host := flag.String("host", "127.0.0.1", "host to listen on")
-	port := flag.Int("port", 8002, "port to listen on")  // add another port
+	port := flag.Int("port", 8080, "port to listen on")  // add another port
 	flag.Parse()
 
 	rand.Seed(time.Now().UnixNano())
