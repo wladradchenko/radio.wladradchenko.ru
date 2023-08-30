@@ -112,7 +112,7 @@ const audio = document.createElement('audio');
 // podcats voice
 const voice = document.createElement('audio');
 // settings
-// audio.autoplay = true;
+audio.autoplay = true;
 audio.volume = 0.65;
 // voice.autoplay = true;
 voice.volume = 0.65;
