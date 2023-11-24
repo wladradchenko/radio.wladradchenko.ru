@@ -347,6 +347,10 @@ function updateQuote() {
     if (languageCode === "eng") {
         quotes_url = '/static/quotes/quotes_eng.json';
         document.querySelector("#list-description").style.marginRight = "10pt";
+        document.querySelector("#game-text").innerText = "Game";
+        document.querySelector("#game-button").addEventListener("click", function() {
+            window.location.href = '/simulator_game?lang=eng';
+        });        
         document.querySelector("#donat-text").innerText = "Donat";
         document.querySelector("#voice-text").innerText = "Podcast";
         document.querySelector("#volume-text").innerText = "Volume";

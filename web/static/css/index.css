@@ -372,7 +372,7 @@
   #list-settings.opened {
     max-height: 300px;
     transition: max-height 0.3s ease-in;
-    box-shadow: 2px 4px 0 #020406;
+    box-shadow: 2px 0px 0 #020406;
   }
 
   .settings-description {
@@ -380,7 +380,7 @@
     position: fixed;
     transform: translateX(-50%);
     right: 30px;
-    bottom: 65px;
+    bottom: 80px;
   }
 
   .button-vol {

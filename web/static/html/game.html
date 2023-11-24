@@ -35,13 +35,13 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <div class="intro_modal__header">
-                    <p>Привет</p>
+                    <p data-eng="Hello">Привет</p>
                     <img src="/static/game/assets/featuredHeader.png" />
                 </div>
-                <h3>Кто вы?</h3>
+                <h3 data-eng="What is your name?">Кто вы?</h3>
                 <hr />
-                <input type="text" id="setNicknameChannelName" placeholder="TenChat никнейм" />
-                <div class="next">
+                <input type="text" id="setNicknameChannelName" />
+                <div class="next" data-eng="Next">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     Продолжить
@@ -51,15 +51,15 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <div class="intro_modal__header">
-                    <p>Привет</p>
+                    <p data-eng="Hello">Привет</p>
                     <img src="/static/game/assets/featuredHeader.png" />
                 </div>
-                <h3>Приветствую в симуляторе написания постов</h3>
+                <h3 data-eng="Welcome to the post writing simulator">Приветствую в симуляторе написания постов</h3>
                 <hr />
-                <p class="text">Ваша цель — увидеть, сколько подписчиков вы сможете получить за 1 год!</p>
-                <p class="text">Создавайте посты, исследуйте и улучшайте свои навыки!</p>
-                <p class="text">С каждым новым постом, увеличивается его качество, что поможет вам получить больше просмотров.</p>
-                <div class="go">
+                <p class="text" data-eng="Your goal is to see how many subscribers you can gain in 1 year!">Ваша цель — увидеть, сколько подписчиков вы сможете получить за 1 год!</p>
+                <p class="text" data-eng="Create posts, explore, and enhance your skills!">Создавайте посты, исследуйте и улучшайте свои навыки!</p>
+                <p class="text" data-eng="With each new post, its quality increases, helping you gain more views.">С каждым новым постом, увеличивается его качество, что поможет вам получить больше просмотров.</p>
+                <div class="go" data-eng="Start">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     Начнем?
@@ -69,36 +69,36 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <div class="endGame__header">
-                    <p>Выполнено</p>
+                    <p data-eng="Complete">Выполнено</p>
                     <img src="/static/game/assets/featuredHeader.png" />
                 </div>
-                <h3 id="endGameChannelName">Поздравляем! Вы провели 1 год в TenChat!</h3>
+                <h3 id="endGameChannelName"></h3>
                 <hr />
-                <h2>Вам удалось получить</h2>
+                <h2 data-eng="You managed to achieve">Вам удалось получить</h2>
                 <h1 class="resultSubscribers">100000</h1>
-                <p>Подписчиков</p>
+                <p data-eng="Subscribers">Подписчиков</p>
                 <p>
-                    Вы выпустили
+                    <span data-eng="You released">Вы выпустили</span>
                     <span class="pencount">1</span>
-                    статью(ей)
+                    <span data-eng="article(s)">статью(ей)</span>
                 </p>
                 <p>
-                    Лучший результат пользователя
+                    <span data-eng="Best user result">Лучший результат пользователя</span>
                     <span class="mostName">x</span>
-                    с
+                    <span data-eng="with">с</span>
                     <span class="mostViews">x</span>
-                    подписчиков!
+                    <span data-eng="subscribers!">подписчиков!</span>
                 </p>
                 <a onclick="saveUserScore();">
-                    <div class="restart">
+                    <div class="restart" data-eng="Save result!">
                         <div class="pixelsTop"></div>
                         <div class="pixelsBottom"></div>
-                        Сохранить резултат!
+                        Сохранить результат!
                     </div>
                 </a>
             </div>
             <div class="researchProgress">
-                <h2>Изучение навыка...</h2>
+                <h2 data-eng="Learning a skill">Изучение навыка...</h2>
                 <div class="bar">
                     <div class="bar_inner"></div>
                 </div>
@@ -109,25 +109,21 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <div class="featured_modal__header">
-                    <p>Избранное</p>
+                    <p data-eng="Favorite">Избранное</p>
                     <img src="/static/game/assets/featuredHeader.png" />
                 </div>
-                <h3>Вас выбрали автором недели!</h3>
+                <h3 data-eng="You've been chosen as the best author of the week!">Вас выбрали автором недели!</h3>
                 <hr />
                 <div class="featured_modal__image">
                     <img src="/static/game/assets/cPreview.png" />
                 </div>
                 <div class="featured_modal__text">
-                    <p>
-                        твоя статья '
-                        <span class="name">пример</span>
-                        '
-                    </p>
-                    <p>получила много репостов</p>
-                    <p class="picker"></p>
-                    <p>это увеличит ваши просмотры!</p>
+                    <span data-eng="Your article 'example'">твоя статья '<span class="name">пример</span>'</span>
+                    <span data-eng="received many reposts">получила много репостов</span>
+                    <span class="picker"></span>
+                    <span data-eng="this will increase your views!">это увеличит ваши просмотры!</span>
                 </div>
-                <div class="awesome">
+                <div class="awesome" data-eng="awesome">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     потрясающе
@@ -135,10 +131,10 @@
             </div>
             <div class="research_modal">
                 <div class="research_modal__header">
-                    <p>Доска навыков</p>
+                    <p data-eng="Skill board">Доска навыков</p>
                     <img src="/static/game/assets/researchHeader.png" />
                 </div>
-                <h3 class="hide">Улучшить свои навыки</h3>
+                <h3 class="hide" data-eng="Improve your skills">Улучшить свои навыки</h3>
                 <hr class="hide" />
                 <div class="close hide">
                     <div class="pixelsTop"></div>
@@ -153,39 +149,43 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <div class="complete_modal__header">
-                    <img src="/static/game/assets/penCompleteHeader.png" />
-                    <p>статья выполнена</p>
+                    <div class="image-container">
+                        <img src="/static/game/assets/penCompleteHeader.png">
+                        <span style="position: absolute;bottom: 20%;left: 50%;transform: translate(-50%, -50%);color: #c4ebfd;text-align: center;">
+                            <span data-eng="article completed">статья выполнена</span>
+                        </span>
+                    </div>
                 </div>
                 <div class="hide">
                     <img />
-                    <h2>Вы закончили статью!</h2>
+                    <h2 data-eng="You've finished the article!">Вы закончили статью!</h2>
                     <hr />
-                    <h3>давай посмотрим, на результаты</h3>
+                    <h3 data-eng="Let's check the results">давай посмотрим, на результаты</h3>
                 </div>
                 <div class="complete_modal__stats hide">
                     <div class="html">
-                        <h4>Грамматика</h4>
+                        <h4 data-eng="Grammar">Грамматика</h4>
                         <img src="/static/game/assets/gHtml.png" /><span>
                             <div class="swatch html"></div>
                             <span>103</span>
                         </span>
                     </div>
                     <div class="css">
-                        <h4>Исследованность</h4>
+                        <h4 data-eng="Research">Исследованность</h4>
                         <img src="/static/game/assets/gJS.png" /><span>
                             <div class="swatch css"></div>
                             <span>103</span>
                         </span>
                     </div>
                     <div class="js">
-                        <h4>Стиль</h4>
+                        <h4 data-eng="Style">Стиль</h4>
                         <img src="/static/game/assets/gCSS.png" /><span>
                             <div class="swatch js"></div>
                             <span>103</span>
                         </span>
                     </div>
                     <div class="design">
-                        <h4>Креативность</h4>
+                        <h4 data-eng="Creativity">Креативность</h4>
                         <img src="/static/game/assets/gDesign.png" /><span>
                             <div class="swatch design"></div>
                             <span>103</span>
@@ -195,20 +195,20 @@
                 <div class="scrap hide">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
-                    отменить статью
+                    <span data-eng="scrap article">отменить статью</span>
                     <img class="icon" src="/static/game/assets/scrapCross.png" />
                 </div>
                 <div class="release hide">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
-                    выпустить статью
+                    <span data-eng="release article">выпустить статью</span>
                     <img class="icon" src="/static/game/assets/releaseArrow.png" />
-                </div>
+                </div>                
             </div>
             <div class="pen">
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
-                <h2>Прогресс:</h2>
+                <h2 data-eng="Progress">Прогресс:</h2>
                 <div class="date">
                     <img src="/static/game/assets/gCalendar.png" /><span></span>
                 </div>
@@ -219,7 +219,7 @@
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     <div class="swatch"></div>
-                    <span style="margin-left: 10pt;">Грамматика</span>
+                    <span style="margin-left: 10pt;" data-eng="Grammar">Грамматика</span>
                     <div class="sep"></div>
                     <span class="val">0</span>
                 </div>
@@ -227,7 +227,7 @@
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     <div class="swatch"></div>
-                    <span style="margin-left: 10pt;">Исследованность</span>
+                    <span style="margin-left: 10pt;" data-eng="Research">Исследованность</span>
                     <div class="sep"></div>
                     <span class="val">0</span>
                 </div>
@@ -235,7 +235,7 @@
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     <div class="swatch"></div>
-                    <span style="margin-left: 10pt;">Стиль</span>
+                    <span style="margin-left: 10pt;" data-eng="Style">Стиль</span>
                     <div class="sep"></div>
                     <span class="val">0</span>
                 </div>
@@ -243,12 +243,12 @@
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     <div class="swatch"></div>
-                    <span style="margin-left: 10pt;">Креативность</span>
+                    <span style="margin-left: 10pt;" data-eng="Creativity">Креативность</span>
                     <div class="sep"></div>
                     <span class="val">0</span>
                 </div>
             </div>
-            <div class="releasedHeader">
+            <div class="releasedHeader" data-eng="Released articles">
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <img class="icon" src="/static/game/assets/codepenIcon.png" />
@@ -258,48 +258,48 @@
             <div class="releasedEmpty">
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
-                <h2>Вы еще не выпустили статью</h2>
+                <h2 data-eng="You haven't published an article yet">Вы еще не выпустили статью</h2>
             </div>
             <div class="released"></div>
             <div class="username">
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <img src="/static/game/assets/userIcon.png" />
-                <h2>Developer</h2>
+                <h2 data-eng="Developer">Разработчик</h2>
             </div>
             <div class="mystats">
                 <img src="/static/game/assets/skilsIcon.png" />
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
-                <h2>Навыки</h2>
+                <h2 data-eng="Skills">Навыки</h2>
                 <div class="mystats_html">
                     <div class="swatch"></div>
-                    Грамматика:
+                    <span data-eng="Grammar:">Грамматика:</span>
                     <span>lv</span>
                     <span class="val">0</span>
                 </div>
-                <div class="mystats_css">
+                <div class="mystats_css" >
                     <div class="swatch"></div>
-                    Исследованность:
+                    <span data-eng="Research:">Исследованность:</span>
                     <span>lv</span>
                     <span class="val">0</span>
                 </div>
                 <div class="mystats_js">
                     <div class="swatch"></div>
-                    Стиль:
+                    <span data-eng="Style:">Стиль:</span>
                     <span>lv</span>
                     <span class="val">0</span>
                 </div>
                 <div class="mystats_design">
                     <div class="swatch"></div>
-                    Креативность:
+                    <span data-eng="Creativity:">Креативность:</span>
                     <span>lv</span>
                     <span class="val">0</span>
                 </div>
             </div>
             <div class="research"></div>
             <div class="divResearchFollower">
-                <div class="researchButton">
+                <div class="researchButton" data-eng="Learn skills">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
                     Получить навыки
@@ -307,25 +307,24 @@
                 <div class="followers">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
-                    Подписчики:
+                    <text data-eng="Followers:">Подписчики:</text>
                     <span>0</span>
                 </div>
             </div>
-            <div class="achievementsButton">
+            <div class="achievementsButton" data-eng="Achievments">
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
-                Achievments
+                Достижения
                 <img src="/static/game/assets/buttonArrow.png" />
             </div>
             <a id="linkToChannel" href="https://tenchat.ru/wladradchenko" target="_blank">
                 <div id="linkToChannelName" class="followButton">
                     <div class="pixelsTop"></div>
                     <div class="pixelsBottom"></div>
-                    Ищи меня в TenChat
                 </div>
             </a>
             <div class="startMashing">
-                <div class="auto off">
+                <div class="auto off" data-eng="auto">
                     авто
                     <img class="cross" src="/static/game/assets/autoCross.png" /><img class="tick" src="/static/game/assets/autoTick.png" />
                     <div class="pixelsTop"></div>
@@ -334,7 +333,7 @@
                 <div class="pixelsTop"></div>
                 <div class="pixelsBottom"></div>
                 <h2>
-                    <span>Кликай на экран, чтобы написать статью</span>
+                    <span data-eng="Click on the screen to write an post">Кликай на экран, чтобы написать статью</span>
                 </h2>
             </div>
             <canvas class="grain"></canvas>
@@ -392,6 +391,25 @@
             });
         </script>
         <script>
+            // Function to get URL parameters
+            function getUrlParams() {
+                const searchParams = new URLSearchParams(window.location.search);
+                return Object.fromEntries(searchParams.entries());
+            }
+    
+            // Check for the language parameter in the URL
+            const urlParams = getUrlParams();
+            if (urlParams.lang && urlParams.lang === 'eng') {
+                // Translate to English
+                document.documentElement.lang = 'eng'; // Change document language to English
+    
+                // Replace Russian text with English
+                document.querySelectorAll('[data-eng]').forEach(element => {
+                    element.textContent = element.getAttribute('data-eng');
+                });
+            }
+        </script>
+        <script>
             // Get a random number between 0 and 4 (inclusive)
             const randomNumber = Math.floor(Math.random() * 6);
 
@@ -400,71 +418,86 @@
             // Based on the random number, select a channel randomly
             switch (randomNumber) {
                 case 0:
-                    channelName = 'tenchat';
+                    channelName = 'TenChat';
                     break;
                 case 1:
-                    channelName = 'habr';
+                    channelName = 'Habr';
                     break;
                 case 2:
-                    channelName = 'github';
+                    channelName = 'GitHub';
                     break;
                 case 3:
-                    channelName = 'youtube';
+                    channelName = 'YouTube';
                     break;
                 case 4:
-                    channelName = 'telegram';
+                    channelName = 'Telegram';
                     break;
                 default:
-                    channelName = 'dev';
+                    channelName = 'Dev';
                     break;
             }
 
-            if (channelName === 'tenchat') {
+            const translationsChannel = {
+                'eng': {
+                    'linkToChannelName': `Follow me on ${channelName}`,
+                    'endGameChannelName': `Congratulations! You have spent 1 year on ${channelName}!`,
+                    'setNicknameChannelName': `Any name or your ${channelName} nickname`
+                },
+                'rus': {
+                    'linkToChannelName': `Ищи меня в ${channelName}`,
+                    'endGameChannelName': `Поздравляем! Вы провели 1 год в ${channelName}!`,
+                    'setNicknameChannelName': `Ваш никнейм в ${channelName} или любое имя`
+                }
+            };
+
+            const langChannel = urlParams.lang === 'eng' ? 'eng' : 'rus';
+
+            if (channelName === 'TenChat') {
                 // Update the elements with specific content for 'tenchat'
                 document.getElementById("linkToChannel").href = "https://tenchat.ru/wladradchenko";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня в TenChat";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год в TenChat!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм в TenChat или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoTecnhat.png";
                 $('.floor').css('border-top', '25px solid #f23441');
-            } else if (channelName === 'habr') {
+            } else if (channelName === 'Habr') {
                 // Update the elements with specific content for 'habr'
                 document.getElementById("linkToChannel").href = "https://habr.com/ru/users/wladradchenko";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня на Habr";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год в Habr!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм на Habr или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoHabr.png";
                 $('.floor').css('border-top', '25px solid #ffffff');
-            } else if (channelName === 'github') {
+            } else if (channelName === 'GitHub') {
                 // Update the elements with other content if the channel is not any
                 document.getElementById("linkToChannel").href = "https://github.com/wladradchenko";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня на GitHub";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год на GitHub!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм на GitHub или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoGithub.png";
                 $('.floor').css('border-top', '25px solid #ffffff');
-            } else if (channelName === 'youtube') {
+            } else if (channelName === 'YouTube') {
                 // Update the elements with other content if the channel is not any
                 document.getElementById("linkToChannel").href = "https://www.youtube.com/@wladradchenko";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня на YouTube";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год на YouTube!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм на YouTube или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoYoutube.png";
                 $('.floor').css('border-top', '25px solid #c73b45');
-            } else if (channelName === 'telegram') {
+            } else if (channelName === 'Telegram') {
                 // Update the elements with other content if the channel is not any
                 document.getElementById("linkToChannel").href = "https://t.me/wladblog";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня на Telegram";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год на Telegram!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм на Telegram или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoTelegram.png";
                 $('.floor').css('border-top', '25px solid #179ed6');
-            } else if (channelName === 'dev') {
+            } else if (channelName === 'Dev') {
                 // Update the elements with other content if the channel is not any
                 document.getElementById("linkToChannel").href = "https://dev.to/wladradchenko";
-                document.getElementById("linkToChannelName").innerText = "Ищи меня на Dev.to";
-                document.getElementById("endGameChannelName").innerText = "Поздравляем! Вы провели 1 год на Dev.to!";
-                document.getElementById("setNicknameChannelName").placeholder = "Ваш никнейм на Dev.to или любое имя";
+                document.getElementById('linkToChannelName').innerText = translationsChannel[langChannel]['linkToChannelName'];
+                document.getElementById('endGameChannelName').innerText = translationsChannel[langChannel]['endGameChannelName'];
+                document.getElementById('setNicknameChannelName').placeholder = translationsChannel[langChannel]['setNicknameChannelName'];
                 document.getElementById("logoSocial").src = "/static/game/assets/logoDev.png";
                 $('.floor').css('border-top', '25px solid #ffffff');
             }

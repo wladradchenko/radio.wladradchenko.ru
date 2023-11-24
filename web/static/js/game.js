@@ -61,7 +61,15 @@ const globals = {
     'auto' : false
 }
 
-const penNames = [
+function getUrlParamsGame() {
+  const searchParams = new URLSearchParams(window.location.search);
+  return Object.fromEntries(searchParams.entries());
+}
+const urlParamsGame = getUrlParamsGame();
+const langGame = urlParamsGame.lang === 'eng' ? 'eng' : 'rus';
+
+const translationsPenNames = {
+  "rus": [
     'Основы нейронной сети',
     'Сети GAN',
     'Естественный язык',
@@ -102,9 +110,56 @@ const penNames = [
     'Тестирование ПО',
     'Код рефакторинг',
     'Будущее разработки'
-]
+  ],
+  "eng": [
+    'Fundamentals of Neural Networks',
+    'GAN Networks',
+    'Natural Language Processing',
+    'Machine Learning',
+    'Convolutional Networks',
+    'Reinforcement Learning',
+    'Ethics in AI',
+    'Recurrent Networks',
+    'Chatbots',
+    'Python and Neurons',
+    'Deep Learning',
+    'Big Data',
+    'Algorithm Optimization',
+    'Voice Recognition',
+    'Data Protection',
+    'Cloud Computing',
+    'Transfer Learning',
+    'AI Simulations',
+    'Neural Interfaces',
+    'Server Architecture',
+    'Quantum Computing',
+    'Blockchain Development',
+    'IoT Technologies',
+    'ML Automation',
+    'RESTful API',
+    'Microservices',
+    'JS Frameworks',
+    'NoSQL Development',
+    'Embedded Systems',
+    'Computer Vision',
+    'Game Programming',
+    'VR and AR Technologies',
+    'Mobile Development',
+    'Web Design',
+    'Internet Security',
+    'SQL Databases',
+    'UI/UX Prototyping',
+    'Software Testing',
+    'Code Refactoring',
+    'Future of Development'
+  ]
+};
 
-const research = [
+const penNames = translationsPenNames[langGame];
+
+
+const translationsResearch = {
+  "rus": [
     {
         'index' : 1,
         'name' : 'Изучить основы грамматики',
@@ -368,24 +423,319 @@ const research = [
         'increaseDesign' : 20,
         'researched' : false
     }
-]
+  ],
+  "eng": [
+    {
+        'index': 1,
+        'name': 'Study Grammar Fundamentals',
+        'cost': 10,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 10,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 2,
+        'name': 'Learn How to Research',
+        'cost': 20,
+        'increaseCss': 10,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 3,
+        'name': 'Improve Style',
+        'cost': 30,
+        'increaseCss': 0,
+        'increaseJs': 10,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 4,
+        'name': 'Enhance Creativity',
+        'cost': 50,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 10,
+        'researched': false
+    },{
+        'index': 5,
+        'name': 'Gather Sources',
+        'cost': 100,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml':10,
+        'increaseDesign': 15,
+        'researched': false
+    },{
+        'index': 6,
+        'name': 'Study Fundamentals of Promotion',
+        'cost': 150,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 15,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 7,
+        'name': 'Video Editing',
+        'cost': 200,
+        'increaseCss': 15,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 8,
+        'name': 'Image Generation',
+        'cost': 300,
+        'increaseCss': 0,
+        'increaseJs': 15,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 9,
+        'name': 'Develop Personal Style',
+        'cost': 400,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 15,
+        'researched': false
+    },{
+        'index': 10,
+        'name': 'Learn about Promotion',
+        'cost': 600,
+        'increaseCss': 15,
+        'increaseJs': 20,
+        'increaseHtml': 10,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 11,
+        'name': 'Improve Your Comments',
+        'cost': 800,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 20,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 12,
+        'name': 'Get into Authors of the Week',
+        'cost': 1150,
+        'increaseCss': 20,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 13,
+        'name': 'Increase Reposts',
+        'cost': 1400,
+        'increaseCss': 0,
+        'increaseJs': 20,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 14,
+        'name': 'Remember Font Names',
+        'cost': 1800,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 20,
+        'researched': false
+    },{
+        'index': 15,
+        'name': 'Watch Educational Videos',
+        'cost': 2200,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml': 10,
+        'increaseDesign': 10,
+        'researched': false
+    },{
+        'index': 16,
+        'name': 'Open Group Chats',
+        'cost': 2700,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 25,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 17,
+        'name': 'Learn Preprocessors',
+        'cost': 3200,
+        'increaseCss': 25,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 18,
+        'name': 'Study Neural Networks',
+        'cost': 3800,
+        'increaseCss': 0,
+        'increaseJs': 25,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 19,
+        'name': 'Enhance Video Quality',
+        'cost': 4500,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 25,
+        'researched': false
+    },{
+        'index': 20,
+        'name': 'Improve Toolset',
+        'cost': 5200,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml': 10,
+        'increaseDesign': 25,
+        'researched': false
+    },{
+        'index': 21,
+        'name': 'Teach Writing Articles',
+        'cost': 6000,
+        'increaseCss': 15,
+        'increaseJs': 15,
+        'increaseHtml': 15,
+        'increaseDesign': 10,
+        'researched': false
+    },{
+        'index': 22,
+        'name': 'Connect Creative Neural Networks',
+        'cost': 6600,
+        'increaseCss': 0,
+        'increaseJs': 25,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 23,
+        'name': 'Learn VR Technologies',
+        'cost': 7500,
+        'increaseCss': 0,
+        'increaseJs': 30,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 24,
+        'name': 'Experiment with Latest Technologies',
+        'cost': 9000,
+        'increaseCss': 20,
+        'increaseJs': 20,
+        'increaseHtml': 20,
+        'increaseDesign': 10,
+        'researched': false
+    },{
+        'index': 25,
+        'name': 'Enhance Grammar Mastery',
+        'cost': 11000,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 60,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 26,
+        'name': 'Enhance Research Mastery',
+        'cost': 12000,
+        'increaseCss': 60,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 27,
+        'name': 'Enhance Style Mastery',
+        'cost': 13000,
+        'increaseCss': 0,
+        'increaseJs': 60,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+    },{
+        'index': 28,
+        'name': 'Enhance Creativity Mastery',
+        'cost': 14000,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 60,
+        'researched': false
+    },{
+        'index': 29,
+        'name': 'Create Personal Channel Everywhere',
+        'cost': 15000,
+        'increaseCss': 30,
+        'increaseJs': 30,
+        'increaseHtml': 30,
+        'increaseDesign': 20,
+        'researched': false
+    }
+  ]
+};
+
+const research = translationsResearch[langGame];
 
 research.forEach(function(r) {
-    $('.research_modal__list').append(`
-<div class="item" style="display: flex;flex-direction: column;text-align: center;">
-<div>
-<div class="name" style="text-align: left;">${r.name}<div class="sep"></div></div>
-<div class="stat" style="text-align: left;">
-${r.increaseHtml > 0 ? `Грамматика <span class="green">+ ${r.increaseHtml}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : ''}
-${r.increaseCss > 0 ? `Исследованность <span class="green">+ ${r.increaseCss}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : ''}
-${r.increaseJs > 0 ? `Стиль <span class="green">+ ${r.increaseJs}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : ''}
-${r.increaseDesign > 0 ? `Креативность <span class="green">+ ${r.increaseDesign}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : ''}
-</div>
-</div>
-<div class="research_button" data-index="${r.index}" style="margin-top: 20px"><div class="pixelsTop"></div>
-<div class="pixelsBottom"></div>Получить навык <img src="/static/game/assets/rCost.png" /><span class="cost">${r.cost.toLocaleString()}</div>
-</div>`)
-})
+  const languageContent = {
+      eng: {
+          grammar: 'Grammar',
+          research: 'Research',
+          style: 'Style',
+          creativity: 'Creativity',
+          acquireSkill: 'Acquire Skill',
+      },
+      rus: {
+          grammar: 'Грамматика',
+          research: 'Исследованность',
+          style: 'Стиль',
+          creativity: 'Креативность',
+          acquireSkill: 'Получить навык',
+      }
+  };
+
+  const langContent = langGame === 'eng' ? languageContent.eng : languageContent.rus;
+
+  const increaseGrammar = langContent.grammar + (r.increaseHtml > 0 ? ` <span class="green">+ ${r.increaseHtml}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : '');
+  const increaseResearch = langContent.research + (r.increaseCss > 0 ? ` <span class="green">+ ${r.increaseCss}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : '');
+  const increaseStyle = langContent.style + (r.increaseJs > 0 ? ` <span class="green">+ ${r.increaseJs}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : '');
+  const increaseCreativity = langContent.creativity + (r.increaseDesign > 0 ? ` <span class="green">+ ${r.increaseDesign}<img src="/static/game/assets/arrowUpStat.png"/></span><div class="sep"></div>` : '');
+  const acquireSkillText = langContent.acquireSkill;
+
+  $('.research_modal__list').append(`
+    <div class="item" style="display: flex;flex-direction: column;text-align: center;">
+      <div>
+        <div class="name" style="text-align: left;">${r.name}<div class="sep"></div></div>
+        <div class="stat" style="text-align: left;">
+          ${increaseGrammar}
+          ${increaseResearch}
+          ${increaseStyle}
+          ${increaseCreativity}
+        </div>
+      </div>
+      <div class="research_button" data-index="${r.index}" style="margin-top: 20px">
+        <div class="pixelsTop"></div>
+        <div class="pixelsBottom"></div>${acquireSkillText} <img src="/static/game/assets/rCost.png" /><span class="cost">${r.cost.toLocaleString()}</div>
+      </div>
+  `);
+});
+
 
 $('.auto').click(function(){
     playSound(buttonClick);
@@ -563,23 +913,43 @@ kS = 0;
 
 function keyPress() {
     if(progress > 0) {
-        $('.startMashing h2 span').html("Вот так, продолжай")
+        if (langGame == "eng") {
+          $('.startMashing h2 span').html("That's it, keep going");
+        } else {
+          $('.startMashing h2 span').html("Вот так, продолжай")
+        };
     }
 
     if(progress > 20) {
+      if (langGame == "eng") {
+        $('.startMashing h2 span').html("Almost there!");
+      } else {
         $('.startMashing h2 span').html("Уже близко!")
+      };
     }
 
     if(progress > 40) {
+      if (langGame == "eng") {
+        $('.startMashing h2 span').html("Don't stop");
+      } else {
         $('.startMashing h2 span').html("Не останавливайся")
+      };
     }
 
     if(progress > 70) {
+      if (langGame == "eng") {
+        $('.startMashing h2 span').html("Almost finished");
+      } else {
         $('.startMashing h2 span').html("Практически закончил")
+      };
     }
 
     if(progress > 99) {
+      if (langGame == "eng") {
+        $('.startMashing h2 span').html("Done!");
+      } else {
         $('.startMashing h2 span').html("Готово!")
+      };
     }
     if(globals.makingPen && progress < 100 ) {
         if(!globals.researching && !globals.paused) {
@@ -687,7 +1057,11 @@ $('.release').click(function() {
 $('.scrap').click(function(){
     playSound(buttonClick)
     globals.paused = false;
-    $('.startMashing h2 span').html("Кликни на экран")
+    if (langGame === "eng") {
+        $('.startMashing h2 span').html("Click on display");
+    } else {
+        $('.startMashing h2 span').html("Кликни на экран");
+    };
 
     $('.complete_modal').fadeOut();
 
@@ -712,7 +1086,11 @@ $('.scrap').click(function(){
 })
 
 function release(p) {
-    $('.startMashing h2 span').html("Кликай на экран, чтобы написать статью")
+    if (langGame === "eng") {
+        $('.startMashing h2 span').html("Click on the screen to write an post");
+    } else {
+        $('.startMashing h2 span').html("Кликай на экран, чтобы написать статью");
+    };
     progress = 0;
     $('.releasedEmpty').remove()
     $('.overlay').fadeOut();
@@ -775,9 +1153,11 @@ function release(p) {
 
     }, 1)
 }
-const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-                    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-                   ];
+const translationsMonthNames = {
+  "rus": ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+  "eng": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+};
+const monthNames = translationsMonthNames[langGame];
 var time = 0;
 
 const rootStatElementPosition = {
@@ -787,9 +1167,8 @@ const rootStatElementPosition = {
     'js' : '180px'
 }
 
-const pickers = [
-    'читателями'
-]
+const translationsPickers = {"rus": ['читателями'], "eng": ["readers"]}
+const pickers = translationsPickers[langGame];
 
 d = 0;
 
