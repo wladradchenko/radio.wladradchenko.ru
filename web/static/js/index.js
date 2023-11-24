@@ -1,24 +1,34 @@
 // SERVICE WORKER BLOCK
 // Register service worker
-window.addEventListener(
-    'load',
-    () => navigator.serviceWorker.register('/static/sw.js'),
-    err => console.log('ServiceWorker registration failed: ', err),
-);
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/static/sw.js')
+        .then((registration) => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        })
+        .catch((err) => {
+          console.error('ServiceWorker registration failed: ', err);
+        });
+    });
+} else {
+    console.log('Service workers are not supported.');
+}
   
-  // Prompt to install PWA
-  window.addEventListener('beforeinstallprompt', function(event) {
+  
+// Prompt to install PWA
+window.addEventListener('beforeinstallprompt', function(event) {
     if (event.isInstalled) {
         // PWA is already installed, no need to show notification banner
         return;
-      }
+    }
 
     const notificationBanner = document.getElementById('notification-banner');
 
     if (Notification.permission === 'denied') {
         // User has blocked notifications
         notificationBanner.style.display = 'block';
-     } else if (Notification.permission === 'default') {
+        } else if (Notification.permission === 'default') {
         // User has not yet made a choice
         // Prompt user to allow notifications
         notificationBanner.style.display = 'block';
@@ -61,7 +71,7 @@ window.addEventListener(
 
     // Prevent default prompt
     event.preventDefault();
-  });
+});
   
 // SERVICE WORKER BLOCK
 
