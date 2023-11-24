@@ -837,7 +837,7 @@
   display: none;
   text-align: center;
   width: 60vw;
-  height: 250px;
+  height: 280px;
   position: absolute !important;
   z-index: 3;
   left: 0;
@@ -897,10 +897,6 @@
   left: 0;
   cursor: pointer;
   right: 0;
-}
-.featured_modal__image {
-  float: left;
-  margin-right: 30px;
 }
 .featured_modal__image img {
   width: 198px;
@@ -1535,7 +1531,7 @@ p {
     }
 
     .featured_modal {
-      height: 60vh;
+      height: 55vh;
     }
 }
 

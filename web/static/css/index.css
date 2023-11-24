@@ -380,7 +380,7 @@
     position: fixed;
     transform: translateX(-50%);
     right: 30px;
-    bottom: 80px;
+    bottom: 10vh;
   }
 
   .button-vol {

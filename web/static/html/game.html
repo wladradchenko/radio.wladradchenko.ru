@@ -114,14 +114,16 @@
                 </div>
                 <h3 data-eng="You've been chosen as the best author of the week!">Вас выбрали автором недели!</h3>
                 <hr />
-                <div class="featured_modal__image">
-                    <img src="/static/game/assets/cPreview.png" />
-                </div>
-                <div class="featured_modal__text">
-                    <span data-eng="Your article 'example'">твоя статья '<span class="name">пример</span>'</span>
-                    <span data-eng="received many reposts">получила много репостов</span>
-                    <span class="picker"></span>
-                    <span data-eng="this will increase your views!">это увеличит ваши просмотры!</span>
+                <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;">
+                    <div class="featured_modal__image">
+                        <img src="/static/game/assets/cPreview.png" />
+                    </div>
+                    <div class="featured_modal__text">
+                        <span data-eng="Your article 'example'">твоя статья '<span class="name">пример</span>'</span>
+                        <span data-eng="received many reposts">получила много репостов</span>
+                        <span class="picker"></span>
+                        <span data-eng="this will increase your views!">это увеличит ваши просмотры!</span>
+                    </div>
                 </div>
                 <div class="awesome" data-eng="awesome">
                     <div class="pixelsTop"></div>
@@ -441,12 +443,12 @@
                 'eng': {
                     'linkToChannelName': `Follow me on ${channelName}`,
                     'endGameChannelName': `Congratulations! You have spent 1 year on ${channelName}!`,
-                    'setNicknameChannelName': `Any name or your ${channelName} nickname`
+                    'setNicknameChannelName': `Input your name`
                 },
                 'rus': {
                     'linkToChannelName': `Ищи меня в ${channelName}`,
                     'endGameChannelName': `Поздравляем! Вы провели 1 год в ${channelName}!`,
-                    'setNicknameChannelName': `Ваш никнейм в ${channelName} или любое имя`
+                    'setNicknameChannelName': `Введите ваше имя`
                 }
             };
 
