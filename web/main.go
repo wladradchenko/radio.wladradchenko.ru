@@ -28,7 +28,7 @@ type ServerMusic struct {
 	Genre    string `json:"genre"`
 	MaxRand  int    `json:"max_rand"`
 	NumIter  int    `json:"num_iter"`
-	IsVoice bool		`json:"is_voice`
+	IsVoice bool    `json:"is_voice`
 }
 
 func main() {
