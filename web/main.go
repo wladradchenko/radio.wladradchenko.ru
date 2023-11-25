@@ -28,6 +28,7 @@ type ServerMusic struct {
 	Genre    string `json:"genre"`
 	MaxRand  int    `json:"max_rand"`
 	NumIter  int    `json:"num_iter"`
+	IsVoice bool		`json:"is_voice`
 }
 
 func main() {
@@ -68,14 +69,12 @@ func main() {
 	numVoice := make(map[string][]string)
 
 	for music := range c {
-		if music.Genre == "custom" {
-			genreMap["custom"] = append(genreMap["custom"], music.URL)
+		if !music.IsVoice {
+			genreMap[music.Genre] = append(genreMap[music.Genre], music.URL)
 		} else {
 			numVoice[music.Genre] = append(numVoice[music.Genre], music.URL)
 		}
 	}
-
-	fmt.Printf("Files today: %d\n", len(genreMap["custom"]))
 
 	for key, val := range numVoice {
 		fmt.Printf("Key: %s, Num Values: %d\n", key, len(val))

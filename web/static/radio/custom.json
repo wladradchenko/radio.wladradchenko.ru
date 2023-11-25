@@ -1,5 +1,6 @@
 [
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/", "genre": "custom", "max_rand": 60, "num_iter": 30},
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/rus/", "genre": "rus", "max_rand": 12, "num_iter": 12},
-    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/eng/", "genre": "eng", "max_rand": 10, "num_iter": 10}
+    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/lofi/", "genre": "custom", "max_rand": 221, "num_iter": 50, "is_voice": false, "name": "Neural Lo-Fi"},
+    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/techno/", "genre": "techno", "max_rand": 74, "num_iter": 50, "is_voice": false, "name": "Neural Techno"},
+    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/rus/", "genre": "rus", "max_rand": 10, "num_iter": 10, "is_voice": true, "name": "Neural Voice"},
+    {"url": "https://wladradchenko.ru/static/radio.wladradchenko.ru/voice/eng/", "genre": "eng", "max_rand": 10, "num_iter": 10, "is_voice": true, "name": "Neural Voice"}
 ]

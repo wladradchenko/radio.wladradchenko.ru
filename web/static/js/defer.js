@@ -1,26 +1,61 @@
 // GET MULTI-SELECT OPTIONS //
 // Load the radio data from radio.json
-fetch('/static/radio/radio.json')
-    .then(response => response.json())
-    .then(data => {
-        let optionsSet = {};
-        data.forEach(item => {
-        optionsSet[item.genre] = item.name;
+function fetchAndProcessData(jsonUrl, source) {
+    return fetch(jsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            let optionsSet = {};
+            data.forEach(item => {
+                if (!item.is_voice) {
+                    optionsSet[item.genre] = { name: item.name, source: source };
+                }
+            });
+
+            let options = [];
+            for (let genre in optionsSet) {
+                options.push(`<option value="${genre}" data-source="${optionsSet[genre].source}">${optionsSet[genre].name}</option>`);
+            }
+
+            return options;
+        })
+        .catch(error => {
+            console.error('Error fetching radio data:', error);
+            return [];
         });
+}
 
-        let options = [`<option value="custom">Wladradchenko</option>`];
-        for (let genre in optionsSet) {
-            options.push(`<option value="${genre}">${optionsSet[genre]}</option>`);
-        }
-
+Promise.all([fetchAndProcessData('/static/radio/custom.json', 'custom'), fetchAndProcessData('/static/radio/radio.json', 'radio')])
+    .then(results => {
+        let combinedOptions = results.reduce((acc, cur) => acc.concat(cur), []);
+        
         let multiSelect = document.querySelector('#name-filter');
         let rangeSelect = document.createRange();
-        let fragmentSelect = rangeSelect.createContextualFragment(options.join('\n'));
+        let fragmentSelect = rangeSelect.createContextualFragment(combinedOptions.join('\n'));
         multiSelect.appendChild(fragmentSelect);
-    })
-    .catch(error => {
-        console.error('Error fetching radio data:', error);
+
+        // Set the first option as selected by default if none is selected
+        if (!multiSelect.querySelector('option[selected]')) {
+            multiSelect.querySelector('option').setAttribute('selected', true);
+        }
     });
+
+
+// Function to change the option's text
+function changeOptionTextCustom(option) {
+    const originalText = option.textContent;
+    if (option.dataset.source === 'custom') {
+        option.textContent = 'Wladradchenko';
+        setTimeout(() => {
+            option.textContent = originalText;
+        }, 5000);
+    }
+}
+
+// Interval function to animate text change for the selected option
+setInterval(() => {
+    const selectedOption = document.querySelector('#name-filter option:checked');
+    changeOptionTextCustom(selectedOption);
+}, 5000);
 // GET MULTI-SELECT OPTIONS //
 
 
@@ -54,24 +89,26 @@ fetch('/static/assets/')
     .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        const backgroundNames= Array.from(doc.querySelectorAll('a'))
+        const backgroundNames = Array.from(doc.querySelectorAll('a'))
             .map(link => '/static/assets/' + link.textContent.trim());
 
         let backgroundImg = backgroundNames[Math.floor(Math.random() * backgroundNames.length)];
-        // Get the img element
         const imgElement = document.querySelector('.background-img');
-
-        // Get the src attribute value
         imgElement.src = `${backgroundImg}`;
+
+        // Check if the select element has options
+        const nameFilterSelect = document.querySelector('#name-filter');
+        if (nameFilterSelect && nameFilterSelect.options.length > 0) {
+            imgElement.addEventListener('load', () => {
+                setMediaMetadata(null);
+            });
+        }
+
         setInterval(() => {
             backgroundImg = backgroundNames[Math.floor(Math.random() * backgroundNames.length)];
             imgElement.src = `${backgroundImg}`;
-        }, 60000); // update background every minute (60000 milliseconds)
-
-        // Listen for changes to the imgElement.src property
-        imgElement.addEventListener('load', () => {
-            setMediaMetadata(null);
-        });
+        }, 60000);
     })
     .catch(error => console.error(error));
+
 // GET RANDOM BACKGROUND //
