@@ -417,26 +417,40 @@
 
             let channelName;
 
-            // Based on the random number, select a channel randomly
-            switch (randomNumber) {
-                case 0:
-                    channelName = 'TenChat';
-                    break;
-                case 1:
-                    channelName = 'Habr';
-                    break;
-                case 2:
-                    channelName = 'GitHub';
-                    break;
-                case 3:
-                    channelName = 'YouTube';
-                    break;
-                case 4:
-                    channelName = 'Telegram';
-                    break;
-                default:
-                    channelName = 'Dev';
-                    break;
+            if (urlParams.social && urlParams.social === 'tenchat') {
+                channelName = 'TenChat';
+            } else if (urlParams.social && urlParams.social === 'habr') {
+                channelName = 'Habr';
+            } else if (urlParams.social && urlParams.social === 'github') {
+                channelName = 'GitHub';
+            } else if (urlParams.social && urlParams.social === 'youtube') {
+                channelName = 'YouTube';
+            } else if (urlParams.social && urlParams.social === 'telegram') {
+                channelName = 'Telegram';
+            } else if (urlParams.social && urlParams.social === 'dev') {
+                channelName = 'Dev';
+            } else {
+                // Based on the random number, select a channel randomly
+                switch (randomNumber) {
+                    case 0:
+                        channelName = 'TenChat';
+                        break;
+                    case 1:
+                        channelName = 'Habr';
+                        break;
+                    case 2:
+                        channelName = 'GitHub';
+                        break;
+                    case 3:
+                        channelName = 'YouTube';
+                        break;
+                    case 4:
+                        channelName = 'Telegram';
+                        break;
+                    default:
+                        channelName = 'Dev';
+                        break;
+                }
             }
 
             const translationsChannel = {
