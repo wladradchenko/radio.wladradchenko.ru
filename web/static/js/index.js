@@ -311,7 +311,7 @@ function podcatGenerator() {
 
 function playVoice() {
     if (voice.currentTime == 0 && prevVoice == 0) {
-        const nextPlayTime = Math.floor(Math.random() * (10 * 60 * 1000)) + 15 * 60 * 1000; // Random time between 1 minutes and 2 minutes
+        const nextPlayTime = Math.floor(Math.random() * (10 * 60 * 1000)) + 15 * 60 * 1000; // Random time between 10 minutes and 25 minutes
         setTimeout(podcatGenerator, nextPlayTime);
     } else if (voice.currentTime == 0 && prevVoice != 0) {
         // Set a timeout to play the voice file again after a random amount of time

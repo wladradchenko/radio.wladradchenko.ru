@@ -1,14 +1,12 @@
 // GET MULTI-SELECT OPTIONS //
 // Load the radio data from radio.json
-function fetchAndProcessData(jsonUrl, source) {
+function fetchAndProcessData(jsonUrl) {
     return fetch(jsonUrl)
         .then(response => response.json())
         .then(data => {
             let optionsSet = {};
             data.forEach(item => {
-                if (!item.is_voice) {
-                    optionsSet[item.genre] = { name: item.name, source: source };
-                }
+                optionsSet[item.genre] = { name: item.name, source: item.source };
             });
 
             let options = [];
@@ -24,7 +22,7 @@ function fetchAndProcessData(jsonUrl, source) {
         });
 }
 
-Promise.all([fetchAndProcessData('/static/radio/custom.json', 'custom'), fetchAndProcessData('/static/radio/radio.json', 'radio')])
+Promise.all([fetchAndProcessData('/static/radio/radio.json')])
     .then(results => {
         let combinedOptions = results.reduce((acc, cur) => acc.concat(cur), []);
         
@@ -43,7 +41,7 @@ Promise.all([fetchAndProcessData('/static/radio/custom.json', 'custom'), fetchAn
 // Function to change the option's text
 function changeOptionTextCustom(option) {
     const originalText = option.textContent;
-    if (option.dataset.source === 'custom') {
+    if (option.dataset.source === 'neural') {
         option.textContent = 'Wladradchenko';
         setTimeout(() => {
             option.textContent = originalText;

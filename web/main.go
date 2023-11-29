@@ -14,7 +14,6 @@ import (
 	"net/http"
 	"sync"
 	"time"
-	"strconv"
 )
 
 type Radio struct {
@@ -23,12 +22,9 @@ type Radio struct {
 	Name  string `json:"name"`
 }
 
-type ServerMusic struct {
-	URL      string `json:"url"`
-	Genre    string `json:"genre"`
-	MaxRand  int    `json:"max_rand"`
-	NumIter  int    `json:"num_iter"`
-	IsVoice bool    `json:"is_voice`
+type Podcast struct {
+	Url      string `json:"url"`
+	Lang string `json:"lang"`
 }
 
 func main() {
@@ -42,43 +38,35 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	var wg sync.WaitGroup
-	c := make(chan ServerMusic)
 
-	serverMusicFile := "./static/radio/custom.json"
-	serverMusicList, err := readCustomMusicFromFile(serverMusicFile)
+	podcastFile := "./static/radio/podcast.json"
+	podcasts, err := readPodcastFromFile(podcastFile)
 	if err != nil {
 		log.Fatalf("Error reading radios from file: %s", err)
 	}
 
-	for _, music := range serverMusicList {
-		for i := 0; i < music.NumIter; i++ {
-			randInt := rand.Intn(music.MaxRand) + 1
-			urlMusic := music.URL + strconv.Itoa(randInt) + ".mp3"
-
-			wg.Add(1)
-			go checkMusicFile(urlMusic, &wg, c, music.Genre)
-		}
+	podcastChan := make(chan Podcast)
+	for _, podcast := range podcasts {
+		wg.Add(1)
+		go checkPodcast(podcast, &wg, podcastChan)
 	}
 
 	go func() {
 		wg.Wait()
-		close(c)
+		close(podcastChan)
 	}()
 
-	genreMap := make(map[string][]string)
 	numVoice := make(map[string][]string)
 
-	for music := range c {
-		if !music.IsVoice {
-			genreMap[music.Genre] = append(genreMap[music.Genre], music.URL)
-		} else {
-			numVoice[music.Genre] = append(numVoice[music.Genre], music.URL)
-		}
+	var validPodcasts []Podcast
+	for podcast := range podcastChan {
+		validPodcasts = append(validPodcasts, podcast)
+		numVoice[podcast.Lang] = append(numVoice[podcast.Lang], podcast.Url)
 	}
 
-	for key, val := range numVoice {
-		fmt.Printf("Key: %s, Num Values: %d\n", key, len(val))
-	}
+	fmt.Printf("Podcasts found: %d\n", len(validPodcasts))
+
+	genreMap := make(map[string][]string)
 
 	radioFile := "./static/radio/radio.json"
 	radios, err := readRadiosFromFile(radioFile)
@@ -129,18 +117,18 @@ func readRadiosFromFile(file string) ([]Radio, error) {
 	return radios, nil
 }
 
-func readCustomMusicFromFile(file string) ([]ServerMusic, error) {
+func readPodcastFromFile(file string) ([]Podcast, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
-	var serverMusic []ServerMusic
-	if err = json.Unmarshal(data, &serverMusic); err != nil {
+	var podcasts []Podcast
+	if err = json.Unmarshal(data, &podcasts); err != nil {
 		return nil, err
 	}
 
-	return serverMusic, nil
+	return podcasts, nil
 }
 
 func checkRadio(radio Radio, wg *sync.WaitGroup, radioChan chan<- Radio) {
@@ -157,18 +145,17 @@ func checkRadio(radio Radio, wg *sync.WaitGroup, radioChan chan<- Radio) {
 	}
 }
 
-func checkMusicFile(url string, wg *sync.WaitGroup, c chan<- ServerMusic, genre string) {
+func checkPodcast(podcast Podcast, wg *sync.WaitGroup, podcastChan chan<- Podcast) {
 	defer wg.Done()
-
-	resp, err := http.Get(url)
+	resp, err := http.Get(podcast.Url)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Error checking radio %s: %s", podcast.Url, err)
 		return
 	}
 	defer resp.Body.Close()
 
 	if resp.Header.Get("Content-Type") == "audio/mpeg" {
-		c <- ServerMusic{URL: url, Genre: genre}
+		podcastChan <- podcast
 	}
 }
 
