@@ -2,7 +2,7 @@
 [![Go](https://img.shields.io/github/go-mod/go-version/wladradchenko/radio.wladradchenko.ru?filename=web%2Fgo.mod)](https://github.com/wladradchenko/radio.wladradchenko.ru)
 [![GitHub package version](https://img.shields.io/github/v/release/wladradchenko/radio.wladradchenko.ru?display_name=tag&sort=semver)](https://github.com/wladradchenko/radio.wladradchenko.ru)
 [![License: MIT v1.0](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wladradchenko/radio.wladradchenko.ru/blob/main/LICENSE)
-[![Podcast](https://img.shields.io/badge/podcast-neural-blue.svg)](neuralrussianman.mave.digital)
+[![Podcast](https://img.shields.io/badge/neural-podcast-blue.svg)](neuralrussianman.mave.digital)
 
 <p align="right">(<a href="README.md">EN</a>)</p>
 <div id="top"></div>
