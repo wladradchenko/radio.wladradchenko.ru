@@ -495,6 +495,6 @@ audio.addEventListener('error', (event) => {
     console.error('Error loading audio file:', event.target.error.message);
   
     // Revert to a default audio file
-    audio.src = 'https://wladradchenko.ru/stream?station=lofi';
+    audio.src = 'https://wladradchenko.ru/stream?station=christmas';
 });
 // IF AUDIO IS BROKEN //
