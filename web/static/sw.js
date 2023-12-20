@@ -1,6 +1,6 @@
 let CACHE_VERSION = 'v1'; // Initial cache version
 const CACHE_NAME = `pwa-cache-${CACHE_VERSION}`;
-const urlsToCache = ["/index.html", "/style.css", "/index.js", "defer.js", "/game.html", "/game.css", "/game.js"];
+const urlsToCache = ["/index.html", "/style.css", "/index.js", "defer.js", "/game.html", "/game.css", "/game.js", "/radio/radio.json", "/radio/podcast.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
