@@ -1,4 +1,12 @@
 [
-    {"url": "https://wladradchenko.ru/stream?station=lofi", "genre": "custom", "name": "Neural Christmas", "source": "2d"},
-    {"url": "https://wladradchenko.ru/stream?station=christmas_vocals", "genre": "christmas_vocals", "name": "Neural Christmas", "source": "3d"}
+    {"url": "https://wladradchenko.ru/stream?station=christmas", "genre": "custom", "name": "Neural Christmas", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=christmas_vocals", "genre": "christmas_vocals", "name": "Neural Christmas", "source": "3d"},
+    {"url": "https://wladradchenko.ru/stream?station=lofi", "genre": "custom_lofi", "name": "Neural Lo-Fi", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=techno", "genre": "techno", "name": "Neural Techno", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=metal", "genre": "metal", "name": "Neural Metal", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=metal_vocals", "genre": "metal_vocals", "name": "Neural Metal", "source": "3d"},
+    {"url": "https://wladradchenko.ru/stream?station=retro", "genre": "retro", "name": "Neural 80s", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=retro_vocals", "genre": "retro_vocals", "name": "Neural 80s", "source": "3d"},
+    {"url": "https://deep-house-sounds.stream.laut.fm/deep-house-sounds?pl=m3u&t302=2023-09-02_06-50-56&uuid=13263a08-8336-47ab-8b51-1b7fdf0fc3b7", "genre": "deephouse", "name": "Deep House", "source": "3d"},
+    {"url": "https://stream-008.zeno.fm/qe1hrwvkg48uv?zs=Y_LS5fPtRJmrvIQ7pZTV4g", "genre": "gta", "name": "GTA", "source": "3d"}
 ]

@@ -78,9 +78,9 @@ window.addEventListener('beforeinstallprompt', function(event) {
 
 // HANDLE EVENT BLOCK //
 document.getElementById("name-filter").addEventListener("change", function() {
-    var filter = this.value;
+    const modeFolder = is2DMode ? '2d' : '3d'; // this.value; was value of select for example custom
     // Voice will work only in custom radio
-    muteVoice(filter);
+    muteVoice(modeFolder);
     canPlay();
 });
 // HANDLE EVENT BLOCK //
@@ -125,21 +125,21 @@ const voice = document.createElement('audio');
 audio.autoplay = true;
 audio.volume = 0.65;
 // voice.autoplay = true;
-voice.volume = 0.65;
+voice.volume = 1;
 
 let prevAudio;
 let prevVoice = 0;
 
 function playSong() {
-    let filter = document.getElementById("name-filter").value;
-    if (filter === "") {
-        filter = "custom"
+    let optionValue = document.getElementById("name-filter").value;
+    if (optionValue === "") {
+        optionValue = "custom"
     }
 
     let lis = document.querySelectorAll('#names-list li');
 
     let nextLi = lis[lis.length - 1];
-    let nextSrc = nextLi.getAttribute(filter);
+    let nextSrc = nextLi.getAttribute(optionValue);
 
     prevAudio = audio.src;
     audio.src = nextSrc;
@@ -153,15 +153,15 @@ function canPlay() {
     buttonSwitch.classList.remove('playing');
     buttonSwitch.classList.add('playing');
     audio.addEventListener('canplay', function() {
-        audio.play(); //TODO
+        audio.play();
     });
 };
 
 
 audio.addEventListener('ended', playSong);
 playSong();
-audio.pause();  // TODO check
-voice.pause();   // TODO check
+audio.pause();
+voice.pause(); 
 
 const buttonPlay = document.querySelector('.play');
 const buttonSwitch = document.querySelector('.button-play');
@@ -173,7 +173,7 @@ const onPlayBtnClick = () => {
 
         // Check if voice should be played
         if (voice.currentTime != 0) {
-            if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
+            if (voiceButtonOn.style.display == 'none' && is2DMode) {
                 voice.volume = 0;
             } else {
                 if (!audio.paused) { 
@@ -248,9 +248,9 @@ function changeOptionByClick(reverse = false) {
     // Trigger the change event on the select element
     selectElement.dispatchEvent(new Event('change'));
 
-    var filter = selectElement.value;
+    const modeFolder = is2DMode ? '2d' : '3d';
     // Voice will work only in custom radio
-    muteVoice(filter);
+    muteVoice(modeFolder);
 }
 
 
@@ -306,7 +306,7 @@ function podcatGenerator() {
     // TODO: Uncommit if I will wanna to work with not lang, with int
     // voice.src = lisVoice[prevVoice];
 
-    if (!audio.paused) {  // If the audio is currently playing
+    if (!audio.paused & audio.volume != 0 & voice.volume != 0) {  // If the audio is currently playing
         voice.play();
         audio.volume = 0.1;
     }
@@ -329,14 +329,14 @@ function playVoice() {
     }
 }
 
-function muteVoice(filter) {
-    if (filter != 'custom') {
+function muteVoice(mode) {
+    if (mode != '2d') {
         // User change radio, than mute off podcats
         // console.log("Turn Off Voice")
         voiceButtonOn.style.display = 'none';
         voiceButtonOff.style.display = 'block';
         voice.volume = 0;
-    } else if (filter == 'custom' && voiceButtonOn.style.display == 'block') {
+    } else if (mode == '2d' && voiceButtonOn.style.display == 'block') {
         // User turned on podcast and listen wladradchenko radio, than mute on
         // console.log("Turn On Voice")
         voice.volume = 1;
@@ -451,7 +451,7 @@ const voiceButtonOn = voiceButton.querySelector('#voice-on-button');
 const voiceButtonOff = voiceButton.querySelector('#voice-off-button');
 
 function voiceChangeButton() {
-    if (voiceButtonOn.style.display == 'none' && document.getElementById("name-filter").value == 'custom') {
+    if (voiceButtonOn.style.display == 'none' && is2DMode) {
         voiceButtonOn.style.display = 'block';
         voiceButtonOff.style.display = 'none';
         voice.volume = 1;
