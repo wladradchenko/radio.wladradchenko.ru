@@ -1,8 +1,4 @@
 [
-    {"url": "https://wladradchenko.ru/stream?station=lofi", "genre": "custom", "name": "Neural Lo-Fi", "source": "neural"},
-    {"url": "https://wladradchenko.ru/stream?station=techno", "genre": "techno", "name": "Neural Techno", "source": "neural"},
-    {"url": "https://usa9.fastcast4u.com/proxy/jamz?mp=/1", "genre": "lofi", "name": "Lo-Fi", "source": "radio"},
-    {"url": "https://ice55.securenetsystems.net/DASH25", "genre": "lofi", "name": "Lo-Fi", "source": "radio"},
-    {"url": "https://boxradio-edge-08.streamafrica.net/lofi", "genre": "lofi", "name": "Lo-Fi", "source": "radio"},
-    {"url": "https://stream-020.zeno.fm/0r0xa792kwzuv?zs=wFOyrB8mRJqJGCCVLLuFJw", "genre": "lofi", "name": "Lo-Fi", "source": "radio"}
+    {"url": "https://wladradchenko.ru/stream?station=lofi", "genre": "custom", "name": "Neural Christmas", "source": "2d"},
+    {"url": "https://wladradchenko.ru/stream?station=christmas_vocals", "genre": "christmas_vocals", "name": "Neural Christmas", "source": "3d"}
 ]

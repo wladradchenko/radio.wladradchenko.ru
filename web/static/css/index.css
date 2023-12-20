@@ -85,7 +85,12 @@
     transform: translateX(-5px);
   }
   
-  .buttons-wrapper.right:hover {
+  /* transform animation for next right */
+  /* .buttons-wrapper.right:hover {
+    transform: translateX(5px);
+  } */
+
+  .buttons-wrapper.mode:hover {
     transform: translateX(5px);
   }
   

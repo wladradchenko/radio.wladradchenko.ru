@@ -213,25 +213,35 @@ function onStopBtnClick() {
 navigator.mediaSession.setActionHandler('stop', onStopBtnClick);
 
 function changeOptionByClick(reverse = false) {
-    // Get a reference to the select element
     var selectElement = document.getElementById("name-filter");
-    
-    // Determine the new selected index based on whether or not we're reversing the order
-    var selectedIndex;
+    var selectedIndex = selectElement.selectedIndex;
+    var optionsLength = selectElement.options.length;
+
+    // Function to find the next visible index in a specified direction
+    function findNextVisibleIndex(startIndex, direction) {
+        let index = startIndex;
+        while (direction === 'forward' ? index < optionsLength : index >= 0) {
+            if (window.getComputedStyle(selectElement.options[index]).display !== 'none') {
+                return index;
+            }
+            index += direction === 'forward' ? 1 : -1;
+        }
+        return -1; // Return -1 if no visible index is found
+    }
+
+    // Calculate the new index based on visibility and direction
     if (reverse) {
-        if (selectElement.selectedIndex == 0) {
-            selectedIndex = selectElement.options.length - 1;
-        } else {
-            selectedIndex = selectElement.selectedIndex - 1;
+        selectedIndex = findNextVisibleIndex(selectedIndex - 1, 'backward');
+        if (selectedIndex === -1) {
+            selectedIndex = findNextVisibleIndex(optionsLength - 1, 'backward'); // Start from last if not found earlier
         }
     } else {
-        if (selectElement.selectedIndex == selectElement.options.length - 1) {
-            selectedIndex = 0;
-        } else {
-            selectedIndex = selectElement.selectedIndex + 1;
+        selectedIndex = findNextVisibleIndex(selectedIndex + 1, 'forward');
+        if (selectedIndex === -1) {
+            selectedIndex = findNextVisibleIndex(0, 'forward'); // Start from 0 if not found earlier
         }
     }
-    
+
     // Set the new selected index
     selectElement.selectedIndex = selectedIndex;
 
@@ -498,3 +508,43 @@ audio.addEventListener('error', (event) => {
     audio.src = 'https://wladradchenko.ru/stream?station=christmas';
 });
 // IF AUDIO IS BROKEN //
+
+//CHANGE BACKGROUND AND LIST GENRE FILTER LOGICAL//
+function modeBackground(elem) {
+    const btnMode = elem.querySelector(".button");
+    const multiSelectFilter = document.querySelector('#name-filter');
+    const btnModeText = btnMode.textContent.trim();
+
+    if (btnModeText === '2D') {
+        is2DMode = false; // Toggle to 3D mode
+        btnMode.textContent = '3D';
+        for (let i = 0; i < multiSelectFilter.options.length; i++) {
+            let optionSource = multiSelectFilter.options[i].getAttribute('data-source') || '2d';
+            if (optionSource === '2d') {
+                multiSelectFilter.options[i].style.display = 'none';
+            } else {
+                multiSelectFilter.options[i].innerText = multiSelectFilter.options[i].getAttribute('data-name')  || multiSelectFilter.options[i].innerText;
+                multiSelectFilter.options[i].style.display = '';
+            }
+        }
+    } else {
+        is2DMode = true; // Toggle to 2D mode
+        btnMode.textContent = '2D';
+        for (let i = 0; i < multiSelectFilter.options.length; i++) {
+            let optionSource = multiSelectFilter.options[i].getAttribute('data-source') || '3d';
+            if (optionSource === '3d') {
+                multiSelectFilter.options[i].style.display = 'none';
+            } else {
+                multiSelectFilter.options[i].innerText = multiSelectFilter.options[i].getAttribute('data-name')  || multiSelectFilter.options[i].innerText;
+                multiSelectFilter.options[i].style.display = '';
+            }
+        }
+    }
+
+    clearInterval(intervalModeId); // Clear the previous interval
+    fetchImages(); // Call fetchImages to fetch images based on the updated mode
+    changeOptionByClick(false);
+    canPlay();
+}
+
+//CHANGE BACKGROUND AND LIST GENRE FILTER LOGICAL//
