@@ -123,12 +123,13 @@ const audio = document.createElement('audio');
 const voice = document.createElement('audio');
 // settings
 audio.autoplay = true;
-audio.volume = 0.65;
+let audioVolume = 0.65;
+audio.volume = audioVolume;
 // voice.autoplay = true;
 voice.volume = 1;
 
 let prevAudio;
-let prevVoice = 0;
+let setTimeoutPodcast;
 
 function playSong() {
     let optionValue = document.getElementById("name-filter").value;
@@ -182,7 +183,10 @@ const onPlayBtnClick = () => {
                 }
             }
         } else {
-            playVoice(); // user not listening podcast yet
+            const nextPlayTime = Math.floor(Math.random() * (15 * 60 * 1000)) + (10 * 60 * 1000); // Random time between 10 and 25 minutes
+            if (!setTimeoutPodcast) {
+                setTimeoutPodcast = setTimeout(podcatGenerator, nextPlayTime);  // user not listening podcast yet
+            }
         }
     } else {
         audio.pause();
@@ -190,6 +194,46 @@ const onPlayBtnClick = () => {
         voice.pause();  // turn off podcast
     }
 };
+
+// Create function to get list of voices as attr
+function podcatGenerator() {
+    // Get voice attr and create sort list
+    let objVoice = JSON.parse(document.querySelectorAll('#names-list li')[0].getAttribute('voice'));
+
+    // Work if folder is language
+    // Get all keys from objVoice
+    const lisVoiceLang = Object.keys(objVoice);
+
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Extract the language code from the path
+    const languageCode = currentPath.split('/')[1];
+
+    // Construct URLs using keys and extracted language code
+    if (lisVoiceLang.includes(languageCode)) {
+        voice.src = objVoice[languageCode];
+    } else {
+        voice.src = objVoice["rus"];
+    }
+
+    if (!audio.paused && audio.volume !== 0 && voice.volume !== 0) {  // If the audio is currently playing
+        voice.play();
+        audio.volume = 0.1;
+        voice.volume = 1;
+    }
+}
+
+// Add an event listener to handle the end of the podcast
+voice.addEventListener('ended', () => {
+    // Restore volumes
+    audio.volume = audioVolume;
+    voice.volume = 0;
+    if (setTimeoutPodcast) {
+        clearTimeout(setTimeoutPodcast);
+        setTimeoutPodcast = undefined;
+    }
+});
 
 buttonPlay.addEventListener('click', onPlayBtnClick);
 navigator.mediaSession.setActionHandler('play', onPlayBtnClick);
@@ -280,55 +324,6 @@ buttonPrev.addEventListener('click', function() {
 });
 navigator.mediaSession.setActionHandler('previoustrack', onPrevBtnClick);
 
-// Create function to get list of voices as attr
-function podcatGenerator() {
-    // Get voice attr and create sort list
-    let objVoice = JSON.parse(document.querySelectorAll('#names-list li')[0].getAttribute('voice'));
-    let lisVoice = Object.values(objVoice).sort((a, b) => parseInt(a) - parseInt(b));
-
-    // Work is folder is language
-    // Get all keys from objVoice
-    const lisVoiceLang = Object.keys(objVoice);
-
-    // Get the current URL path
-    const currentPath = window.location.pathname;
-
-    // Extract the language code from the path
-    const languageCode = currentPath.split('/')[1];
-
-    // Construct URLs using keys and extracted language code
-    if (lisVoiceLang.includes(languageCode)) {
-        voice.src = objVoice[languageCode];
-    } else {
-        voice.src = objVoice["rus"];
-    }
-
-    // TODO: Uncommit if I will wanna to work with not lang, with int
-    // voice.src = lisVoice[prevVoice];
-
-    if (!audio.paused & audio.volume != 0 & voice.volume != 0) {  // If the audio is currently playing
-        voice.play();
-        audio.volume = 0.1;
-    }
-
-    if (prevVoice != lisVoice.length - 1) {
-        // prevVoice += 1; TODO (if need to read a few news)
-        prevVoice = 0
-    } else {
-        prevVoice = 0;
-    }
-}
-
-function playVoice() {
-    if (voice.currentTime == 0 && prevVoice == 0) {
-        const nextPlayTime = Math.floor(Math.random() * (10 * 60 * 1000)) + 15 * 60 * 1000; // Random time between 10 minutes and 25 minutes
-        setTimeout(podcatGenerator, nextPlayTime);
-    } else if (voice.currentTime == 0 && prevVoice != 0) {
-        // Set a timeout to play the voice file again after a random amount of time
-        podcatGenerator()
-    }
-}
-
 function muteVoice(mode) {
     if (mode != '2d') {
         // User change radio, than mute off podcats
@@ -340,6 +335,7 @@ function muteVoice(mode) {
         // User turned on podcast and listen wladradchenko radio, than mute on
         // console.log("Turn On Voice")
         voice.volume = 1;
+        voice.play()
     } else {
         // User on wladradchenko radio, but podacts turned off, than mute ff
         // console.log("Turn Off Voice")
@@ -347,12 +343,6 @@ function muteVoice(mode) {
     }
 }
 
-function endedVoice() {
-    voice.currentTime = 0;
-    playVoice();
-}
-
-voice.addEventListener('ended', endedVoice);
 // AUDIO AND VOICE PLAYER BLOCK //
 
 
@@ -434,7 +424,8 @@ let currentStep = 1;
 
 volumeButton.addEventListener('click', function() {
 currentStep = (currentStep + 1) % volumeSteps.length;
-audio.volume = volumeSteps[currentStep];
+audioVolume = volumeSteps[currentStep];
+audio.volume = audioVolume;
 
 volumeIcons.forEach((icon, index) => {
         if (index === currentStep) {
@@ -505,7 +496,7 @@ audio.addEventListener('error', (event) => {
     console.error('Error loading audio file:', event.target.error.message);
   
     // Revert to a default audio file
-    audio.src = 'https://wladradchenko.ru/stream?station=christmas';
+    audio.src = '/stream?station=lofi';
 });
 // IF AUDIO IS BROKEN //
 

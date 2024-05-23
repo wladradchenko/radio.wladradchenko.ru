@@ -1,5 +1,4 @@
 [
-    {"url": "https://wladradchenko.ru/podcast?rss_feed_url=https://mavecloud.s3mts.ru/storage/feeds/41308.xml", "lang": "rus", "name": "Neural Voice"},
-    {"url": "https://wladradchenko.ru/podcast?rss_feed_url=https://mavecloud.s3mts.ru/storage/feeds/51125.xml", "lang": "rus", "name": "Neural Voice"},
-    {"url": "https://wladradchenko.ru/podcast?rss_feed_url=https://mavecloud.s3mts.ru/storage/feeds/51124.xml", "lang": "eng", "name": "Neural Voice"}
+    {"url": "/podcast?rss_feed_url=https://mavecloud.s3mts.ru/storage/feeds/41308.xml", "lang": "rus", "name": "Neural Voice"},
+    {"url": "/podcast?rss_feed_url=https://mavecloud.s3mts.ru/storage/feeds/51124.xml", "lang": "eng", "name": "Neural Voice"}
 ]

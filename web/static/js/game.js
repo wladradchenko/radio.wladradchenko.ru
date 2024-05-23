@@ -1,5 +1,5 @@
 // let randomInt = Math.floor(Math.random() * 150) + 1;  // Generates a random integer between 1 and 150
-let potentialUrl = `https://wladradchenko.ru/stream?station=8bit`;
+let potentialUrl = `/stream?station=8bit`;
 let defaultUrl = '/static/game/audio/bgG.mp3';
 
 bg = new Audio(potentialUrl);
