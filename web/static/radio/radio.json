@@ -1,19 +1,9 @@
 [
     {"url": "/stream?station=lofi", "genre": "custom", "name": "Neural Lo-Fi", "source": "2d"},
-    {"url": "/stream?station=experiment_vocals", "genre": "experiment_vocals", "name": "Neural Meme", "source": "3d"},
-    {"url": "/stream?station=techno", "genre": "techno", "name": "Neural Techno", "source": "2d"},
-    {"url": "/stream?station=metal", "genre": "metal", "name": "Neural Metal", "source": "2d"},
-    {"url": "/stream?station=metal_vocals", "genre": "metal_vocals", "name": "Neural Metal", "source": "3d"},
+    {"url": "/stream?station=8bit", "genre": "custom", "name": "Neural 8bit", "source": "2d"},
     {"url": "/stream?station=retro", "genre": "retro", "name": "Neural 80s", "source": "2d"},
     {"url": "/stream?station=retro_vocals", "genre": "retro_vocals", "name": "Neural 80s", "source": "3d"},
-    {"url": "/stream?station=sexual", "genre": "sexual", "name": "Neural Sex", "source": "2d"},
-    {"url": "/stream?station=sexual_vocals", "genre": "sexual_vocals", "name": "Neural Sex", "source": "3d"},
-    {"url": "/stream?station=reggae", "genre": "reggae", "name": "Neural Reggae", "source": "3d"},
-    {"url": "/stream?station=jazz", "genre": "jazz", "name": "Neural Jazz", "source": "2d"},
-    {"url": "/stream?station=jazz_vocals", "genre": "jazz_vocals", "name": "Neural Jazz", "source": "3d"},
     {"url": "/stream?station=pop_vocals", "genre": "pop_vocals", "name": "Neural Pop", "source": "3d"},
-    {"url": "/stream?station=deephouse", "genre": "deephouse", "name": "Neural House", "source": "2d"},
-    {"url": "/stream?station=deephouse_vocals", "genre": "deephouse_vocals", "name": "Neural House", "source": "3d"},
     {"url": "/stream?station=space", "genre": "space", "name": "Neural Space", "source": "2d"}
 ]
 
