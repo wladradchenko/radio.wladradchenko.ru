@@ -1,10 +1,10 @@
-Для запуска проекта, достаточно сделать перейти в директорию с main.go и запустить:
+To run the project, just go to the directory with main.go and run:
 
 ```
 go run main.go
 ```
 
-Для билда проекта на linux, используется команда:
+To build a project on Linux, use the command:
 
 ```
 go build -a -tags netgo -ldflags '-w -extldflags "-static"' -o radio.wladradchenko.ru main.go
